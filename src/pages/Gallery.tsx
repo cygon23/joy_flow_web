@@ -1,6 +1,41 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Camera } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+// Local images
+import imp1 from "@/assets/pics/impacts/IMG-20251014-WA0024.jpg";
+import imp2 from "@/assets/pics/impacts/IMG-20251014-WA0058.jpg";
+import imp3 from "@/assets/pics/impacts/IMG-20251014-WA0062.jpg";
+import imp4 from "@/assets/pics/impacts/IMG-20251014-WA0063.jpg";
+import imp5 from "@/assets/pics/impacts/IMG-20251014-WA0067.jpg";
+import imp6 from "@/assets/pics/impacts/IMG-20251014-WA0073.jpg";
+
+import ev1 from "@/assets/pics/event/IMG-20251014-WA0052.jpg";
+import ev2 from "@/assets/pics/event/IMG-20251014-WA0087.jpg";
+
+// Farm images (local)
+import farm1 from "@/assets/pics/farm/01.jpg";
+import farm2 from "@/assets/pics/farm/02.jpg";
+import farm3 from "@/assets/pics/farm/03.jpg";
+import farm4 from "@/assets/pics/farm/04.jpg";
+import farm5 from "@/assets/pics/farm/05.jpg";
+
+import p1 from "@/assets/pics/prod/IMG_1265.jpg";
+import p2 from "@/assets/pics/prod/IMG_1267.jpg";
+import p3 from "@/assets/pics/prod/IMG_1268.jpg";
+import p4 from "@/assets/pics/prod/IMG_1275.jpg";
+import p5 from "@/assets/pics/prod/IMG_7485.jpg";
+import p6 from "@/assets/pics/prod/IMG_7491.jpg";
+import p7 from "@/assets/pics/prod/IMG_7495.jpg";
+
+import v1 from "@/assets/pics/vistor/IMG-20251014-WA0050.jpg";
+import v2 from "@/assets/pics/vistor/IMG-20251014-WA0069.jpg";
+import v3 from "@/assets/pics/vistor/IMG-20251014-WA0080.jpg";
+import v4 from "@/assets/pics/vistor/IMG_0805.jpg";
+import v5 from "@/assets/pics/vistor/IMG_1054.jpg";
+import v6 from "@/assets/pics/vistor/IMG_1196.jpg";
+import v7 from "@/assets/pics/vistor/IMG_1248.jpg";
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -12,29 +47,18 @@ const Gallery = () => {
       id: "events",
       name: "Events",
       description: "Community gatherings and celebrations",
-      thumbnail:
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop",
+      thumbnail: ev1,
       color: "#609F4D",
       images: [
         {
-          url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=800&fit=crop",
+          url: ev1,
           title: "Annual Farmers Festival 2024",
           description: "Celebrating our farmers' achievements",
         },
         {
-          url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&h=800&fit=crop",
+          url: ev2,
           title: "Women Empowerment Workshop",
           description: "Training session for new dairy farmers",
-        },
-        {
-          url: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&h=800&fit=crop",
-          title: "Product Launch Event",
-          description: "Introducing our new yogurt line",
-        },
-        {
-          url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&h=800&fit=crop",
-          title: "Community Health Fair",
-          description: "Free health screenings for farmers",
         },
       ],
     },
@@ -42,29 +66,33 @@ const Gallery = () => {
       id: "farmers",
       name: "Farmers",
       description: "Our incredible women dairy farmers",
-      thumbnail:
-        "https://images.unsplash.com/photo-1464746133101-a2c3f88e0dd9?w=400&h=300&fit=crop",
+      thumbnail: farm1,
       color: "#E8252B",
       images: [
         {
-          url: "https://images.unsplash.com/photo-1464746133101-a2c3f88e0dd9?w=1200&h=800&fit=crop",
+          url: farm1,
           title: "Amina at Her Farm",
           description: "Daily milk collection in Olkeryan",
         },
         {
-          url: "https://images.unsplash.com/photo-1595314916009-10631b5b6b3e?w=1200&h=800&fit=crop",
+          url: farm2,
           title: "Grace's Success Story",
           description: "From single cow to thriving dairy business",
         },
         {
-          url: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200&h=800&fit=crop",
+          url: farm3,
           title: "Farmers' Cooperative Meeting",
           description: "Weekly planning and training session",
         },
         {
-          url: "https://images.unsplash.com/photo-1500076656116-558758c991c1?w=1200&h=800&fit=crop",
+          url: farm4,
           title: "Early Morning Collection",
           description: "Fresh milk ready for processing",
+        },
+        {
+          url: farm5,
+          title: "Women Farmer Training",
+          description: "Capacity building and best practices",
         },
       ],
     },
@@ -72,29 +100,43 @@ const Gallery = () => {
       id: "products",
       name: "Products",
       description: "Premium quality dairy products",
-      thumbnail:
-        "https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=400&h=300&fit=crop",
+      thumbnail: p1,
       color: "#FDB913",
       images: [
         {
-          url: "https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=1200&h=800&fit=crop",
+          url: p1,
           title: "Cultured Milk Range",
           description: "Our signature fermented milk products",
         },
         {
-          url: "https://images.unsplash.com/photo-1571212515416-fca05fd6f39e?w=1200&h=800&fit=crop",
+          url: p2,
           title: "Fresh Yogurt Collection",
           description: "Available in multiple flavors",
         },
         {
-          url: "https://images.unsplash.com/photo-1562004760-aceed24f9a7b?w=1200&h=800&fit=crop",
+          url: p3,
           title: "Butter & Ghee Products",
           description: "Traditional and premium quality",
         },
         {
-          url: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=1200&h=800&fit=crop",
+          url: p4,
           title: "Product Packaging",
           description: "Eco-friendly and convenient",
+        },
+        {
+          url: p5,
+          title: "Bottled Products",
+          description: "Ready for distribution",
+        },
+        {
+          url: p6,
+          title: "Handmade Cheese",
+          description: "Small batch artisan cheese",
+        },
+        {
+          url: p7,
+          title: "Prepared Goods",
+          description: "Value-added dairy products",
         },
       ],
     },
@@ -102,29 +144,43 @@ const Gallery = () => {
       id: "visitors",
       name: "Visitors",
       description: "Partners and guests at our facilities",
-      thumbnail:
-        "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop",
+      thumbnail: v1,
       color: "#2C5F2D",
       images: [
         {
-          url: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=800&fit=crop",
+          url: v1,
           title: "International Delegation Visit",
           description: "Agricultural experts from Kenya",
         },
         {
-          url: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&h=800&fit=crop",
+          url: v2,
           title: "School Field Trip",
           description: "Local students learning about dairy farming",
         },
         {
-          url: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop",
+          url: v3,
           title: "Government Officials Tour",
           description: "Ministry of Agriculture visit",
         },
         {
-          url: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1200&h=800&fit=crop",
+          url: v4,
           title: "Media Coverage",
           description: "Documentary filming at our facility",
+        },
+        {
+          url: v5,
+          title: "Guest Sampling",
+          description: "Visitors tasting products",
+        },
+        {
+          url: v6,
+          title: "Facility Tour",
+          description: "Visitors touring production area",
+        },
+        {
+          url: v7,
+          title: "Community Partners",
+          description: "Collaborative partners and donors",
         },
       ],
     },
@@ -132,29 +188,38 @@ const Gallery = () => {
       id: "impact",
       name: "Impact",
       description: "Real change in communities",
-      thumbnail:
-        "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop",
+      thumbnail: imp1,
       color: "#97233F",
       images: [
         {
-          url: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&h=800&fit=crop",
+          url: imp1,
           title: "New School Construction",
           description: "Built with profits from dairy cooperative",
         },
         {
-          url: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=1200&h=800&fit=crop",
+          url: imp2,
           title: "Women's Health Clinic",
           description: "Free healthcare for farming families",
         },
         {
-          url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1200&h=800&fit=crop",
+          url: imp3,
           title: "Youth Training Program",
           description: "Next generation of dairy entrepreneurs",
         },
         {
-          url: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=1200&h=800&fit=crop",
+          url: imp4,
           title: "Clean Water Initiative",
           description: "New wells in farming communities",
+        },
+        {
+          url: imp5,
+          title: "Community Outreach",
+          description: "Local engagement programs",
+        },
+        {
+          url: imp6,
+          title: "Sustainability Projects",
+          description: "Eco-friendly farming methods",
         },
       ],
     },
@@ -195,6 +260,15 @@ const Gallery = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className='text-center mb-16'>
+          <div className='max-w-7xl mx-auto px-4 text-left mb-6'>
+            <Link
+              to='/'
+              className='inline-flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-gray-900'>
+              <span className='inline-block px-3 py-2 rounded-md bg-secondary/80 hover:bg-primary'>
+                Back to home
+              </span>
+            </Link>
+          </div>
           <h1
             className='text-5xl md:text-7xl font-black mb-6'
             style={{ color: "#609F4D" }}>
