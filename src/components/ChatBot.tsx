@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send, Milk, Package, Phone, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,28 +16,125 @@ const ChatBot = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Array<{ text: string; sender: "user" | "bot" }>>([
     {
-      text: "Hello! 👋 Welcome to African Joy. How can I help you today?",
+      text: "Hello! 👋 Welcome to African Joy. How can I help you today with our premium dairy products and services?",
       sender: "bot",
     },
   ]);
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const handleSendMessage = (text?: string) => {
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const cleanMarkdown = (text: string) => {
+    return text
+      .replace(/[*_~`#]/g, "")
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/(\r\n|\r|\n){2,}/g, "\n\n")
+      .trim();
+  };
+
+  const handleSendMessage = async (text?: string) => {
     const messageText = text || message;
-    if (!messageText.trim()) return;
+    if (!messageText.trim() || isTyping) return;
 
     setMessages((prev) => [...prev, { text: messageText, sender: "user" }]);
     setMessage("");
+    setIsTyping(true);
 
-    // Simulate bot response (no logic, just UI)
-    setTimeout(() => {
+    try {
+      const conversationHistory = messages
+        .slice(-4)
+        .map((msg) => `${msg.sender === "bot" ? "AI" : "User"}: ${msg.text}`)
+        .join("\n");
+
+      const systemPrompt = `You are the African Joy Customer Assistant, a friendly, professional, and knowledgeable AI representing African Joy, a leading dairy producer in Tanzania specializing in premium milk and dairy products.
+
+COMMUNICATION STYLE:
+- Be warm, friendly, and customer-focused
+- Keep initial responses concise and informative (2-3 sentences) unless the user asks for more details
+- Use a conversational, approachable tone while maintaining professionalism
+- Show enthusiasm about African Joy products and commitment to quality
+- Always offer to provide more information if needed
+- End responses by asking if they need anything else
+
+COMPANY INFORMATION:
+Company: African Joy
+Industry: Dairy Production & Distribution
+Specialization: Premium quality milk and dairy products
+Location: Tanzania
+Core Values: Quality, Freshness, Customer Satisfaction, Local Community Support
+
+PRODUCTS & SERVICES:
+1. Fresh Milk - Premium quality, locally sourced
+2. Dairy Products - Various dairy items (yogurt, cheese, butter, etc.)
+3. Wholesale & Retail Distribution
+4. Custom dairy solutions for businesses
+5. Quality assurance and fresh daily delivery
+
+CONTACT INFORMATION:
+- Primary Phone: +255 784 240 780
+- Secondary Phone: +255 745 330 042
+- Instagram: Encourage users to visit our Instagram for product updates, promotions, and behind-the-scenes content
+- Website: Encourage users to visit our website for complete product catalog and online ordering
+
+IMPORTANT INSTRUCTIONS:
+1. CONTEXT BOUNDARIES: Only answer questions about African Joy, our dairy products, services, ordering, delivery, pricing, and general dairy-related inquiries
+2. If asked about topics outside African Joy's context (politics, other companies, unrelated subjects), politely redirect: "I'm here to help with African Joy products and services. For that topic, I'd recommend other resources. Is there anything about our dairy products I can help you with?"
+3. MISSING INFORMATION: If you don't have specific information (exact prices, delivery schedules, product availability), say: "For specific details on [topic], please contact our support team at +255 784 240 780 or +255 745 330 042. They'll be happy to help you!"
+4. SOCIAL MEDIA & WEBSITE: Always suggest visiting Instagram for visual content and website for detailed information
+5. CONCISE RESPONSES: Keep answers brief and clear unless user requests detailed information
+6. STAY ON BRAND: Focus on quality, freshness, local sourcing, and customer care
+
+SAMPLE RESPONSES:
+- Products: "African Joy offers premium fresh milk and a variety of dairy products including [list 2-3]. All sourced locally for maximum freshness. Would you like to know more about a specific product?"
+- Pricing: "For current pricing and special offers, please call us at +255 784 240 780. Our team can provide detailed pricing based on your needs!"
+- Ordering: "You can order by calling +255 784 240 780 or +255 745 330 042. Visit our Instagram and website for product previews. Would you like delivery information too?"
+- Delivery: "We offer fresh daily delivery services. For delivery areas and schedules, contact +255 784 240 780. Where are you located?"
+
+Previous conversation:
+${conversationHistory}
+
+User: ${messageText}
+
+Remember: Be concise, helpful, stay within context, and always provide contact info when you don't have specific details.`;
+
+      const apiUrl = `https://CreepyTech-creepy-ai.hf.space/ai/logic?q=${encodeURIComponent(
+        systemPrompt
+      )}&logic=chat`;
+
+      const response = await fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      if (data && data.result) {
+        const cleanText = cleanMarkdown(data.result);
+        setMessages((prev) => [...prev, { text: cleanText, sender: "bot" }]);
+      } else {
+        throw new Error("Invalid response format");
+      }
+    } catch (error) {
+      console.error("Chat error:", error);
       setMessages((prev) => [
         ...prev,
         {
-          text: "Thank you for your message! Our team will get back to you soon. 🌟",
+          text: "I apologize for the inconvenience. I'm having trouble connecting right now. Please contact our support team directly at +255 784 240 780 or +255 745 330 042. You can also visit our Instagram and website for more information. Thank you for your patience! 🙏",
           sender: "bot",
         },
       ]);
-    }, 1000);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   return (
@@ -57,9 +154,8 @@ const ChatBot = () => {
               {[...Array(4)].map((_, i) => (
                 <motion.div
                   key={`ring-${i}`}
-                  className="absolute inset-0 rounded-full"
+                  className="absolute inset-0 rounded-full border-2 border-primary"
                   style={{
-                    border: "2px solid hsl(101, 45%, 45%)",
                     filter: "blur(1px)",
                   }}
                   animate={{
@@ -111,7 +207,7 @@ const ChatBot = () => {
                     <svg width="8" height="12" viewBox="0 0 12 16">
                       <path
                         d="M6 0C6 0 0 8 0 11C0 13.7614 2.68629 16 6 16C9.31371 16 12 13.7614 12 11C12 8 6 0 6 0Z"
-                        fill="white"
+                        className="fill-primary-foreground"
                         opacity="0.9"
                       />
                     </svg>
@@ -124,11 +220,7 @@ const ChatBot = () => {
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.85 }}
                 onClick={() => setIsOpen(true)}
-                className="relative w-20 h-20 rounded-full overflow-hidden group"
-                style={{
-                  background: "linear-gradient(135deg, hsl(101, 45%, 45%) 0%, hsl(101, 45%, 30%) 100%)",
-                  boxShadow: "0 8px 32px hsla(101, 45%, 45%, 0.5), 0 0 60px hsla(101, 45%, 45%, 0.3)",
-                }}
+                className="relative w-20 h-20 rounded-full overflow-hidden group bg-gradient-to-br from-primary to-primary-dark shadow-[0_8px_32px_hsl(var(--primary)/0.5),0_0_60px_hsl(var(--primary)/0.3)]"
               >
                 {/* Liquid Morphing Background */}
                 <motion.div
@@ -163,8 +255,8 @@ const ChatBot = () => {
                   >
                     <svg width="36" height="48" viewBox="0 0 40 60" fill="none">
                       {/* Milk Bottle */}
-                      <rect x="10" y="18" width="20" height="36" rx="2" fill="white" opacity="0.95" />
-                      <rect x="13" y="8" width="14" height="12" rx="1.5" fill="white" opacity="0.95" />
+                      <rect x="10" y="18" width="20" height="36" rx="2" className="fill-primary-foreground" opacity="0.95" />
+                      <rect x="13" y="8" width="14" height="12" rx="1.5" className="fill-primary-foreground" opacity="0.95" />
                       
                       {/* Milk Level with Animation */}
                       <motion.rect
@@ -172,7 +264,7 @@ const ChatBot = () => {
                         y="28"
                         width="16"
                         height="20"
-                        fill="hsl(300, 100%, 99%)"
+                        className="fill-background"
                         animate={{
                           height: [20, 24, 20],
                           y: [28, 24, 28],
@@ -184,7 +276,7 @@ const ChatBot = () => {
                       />
                       
                       {/* Joy Label */}
-                      <circle cx="20" cy="35" r="4" fill="hsl(101, 45%, 45%)" opacity="0.7" />
+                      <circle cx="20" cy="35" r="4" className="fill-primary" opacity="0.7" />
                     </svg>
                   </motion.div>
                 </div>
@@ -204,16 +296,13 @@ const ChatBot = () => {
 
                 {/* Notification Badge with Pulse */}
                 <motion.div
-                  className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center"
+                  className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center shadow-[0_0_20px_hsl(var(--secondary)/0.8)]"
                   animate={{
                     scale: [1, 1.3, 1],
                   }}
                   transition={{
                     duration: 1.5,
                     repeat: Infinity,
-                  }}
-                  style={{
-                    boxShadow: "0 0 20px hsla(359, 70%, 51%, 0.8)",
                   }}
                 >
                   <motion.span
@@ -337,10 +426,32 @@ const ChatBot = () => {
                           : "bg-card text-foreground shadow-md border border-border"
                       }`}
                     >
-                      <p className="text-sm leading-relaxed">{msg.text}</p>
+                      <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.text}</p>
                     </div>
                   </motion.div>
                 ))}
+                {isTyping && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex justify-start"
+                  >
+                    <div className="bg-card text-foreground shadow-md border border-border rounded-2xl p-4">
+                      <div className="flex gap-1.5">
+                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                        <div
+                          className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                          style={{ animationDelay: "0.15s" }}
+                        ></div>
+                        <div
+                          className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                          style={{ animationDelay: "0.3s" }}
+                        ></div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+                <div ref={messagesEndRef} />
               </div>
 
               {/* Quick Actions */}
@@ -355,7 +466,8 @@ const ChatBot = () => {
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => handleSendMessage(action.value)}
-                      className="flex items-center gap-2 p-3 rounded-xl bg-card hover:bg-primary/10 transition-colors border border-border group"
+                      disabled={isTyping}
+                      className="flex items-center gap-2 p-3 rounded-xl bg-card hover:bg-primary/10 transition-colors border border-border group disabled:opacity-50"
                     >
                       <action.icon className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
                       <span className="text-xs font-medium text-foreground">
@@ -372,13 +484,15 @@ const ChatBot = () => {
                   <Input
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                    onKeyPress={(e) => e.key === "Enter" && !e.shiftKey && handleSendMessage()}
                     placeholder="Type your message..."
+                    disabled={isTyping}
                     className="flex-1 rounded-xl border-border focus:border-primary transition-colors"
                   />
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Button
                       onClick={() => handleSendMessage()}
+                      disabled={!message.trim() || isTyping}
                       size="icon"
                       className="rounded-xl bg-gradient-to-br from-secondary to-secondary/80 hover:to-secondary shadow-lg"
                     >

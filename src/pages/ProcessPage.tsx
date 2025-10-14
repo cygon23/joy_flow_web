@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Droplets, Truck, Factory, Store, CheckCircle, Clock, ThermometerSun, Shield } from "lucide-react";
+import { Droplets, Truck, Factory, Store, CheckCircle, Clock, ThermometerSun, Shield, Leaf } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroProcessing from "@/assets/hero-processing.jpg";
@@ -9,35 +9,57 @@ import heroProcessing from "@/assets/hero-processing.jpg";
 const steps = [
   {
     icon: Droplets,
-    title: "Collection",
-    description: "Fresh milk collected daily from women-owned farms across Tanzania",
-    details: "Our trained collection teams visit each farm twice daily to ensure the freshest milk. We use insulated containers and maintain strict temperature controls from the moment of collection.",
-    time: "6 AM & 6 PM Daily",
-    quality: "Temperature Controlled"
+    title: "Farmer Partnership & Milk Collection",
+    description: "We work hand-in-hand with smallholder farmers — especially women — in the Olkeryan and Meru communities",
+    details: "Our network of over 93+ women farmers supplies high-quality raw milk daily. Through the MEDA (FEGEE) partnership, we train farmers on animal health, milk hygiene, and record-keeping. Farmers receive milk-can incentives and fair payment terms.",
+    time: "Daily Collection",
+    quality: "MEDA Trained Farmers",
+    animation: "Parallax map showing farmers delivering milk cans to collection centers"
   },
   {
     icon: Truck,
-    title: "Transportation",
-    description: "Efficient decentralized pickup reduces spoilage and ensures freshness",
-    details: "Our fleet of refrigerated vehicles follows optimized routes to minimize transit time. GPS tracking ensures real-time monitoring and quick delivery to processing facilities.",
-    time: "Within 2 Hours",
-    quality: "GPS Monitored"
+    title: "Cooling & Transportation",
+    description: "Milk is collected at two main centers — Olkeryan and Karangai",
+    details: "Using dedicated collection tanks, including a newly installed 500-liter cooling tank that keeps milk fresh and safe. Our logistics team and trained riders transport milk to the factory under hygienic and temperature-controlled conditions.",
+    time: "Under 2 Hours",
+    quality: "500L Cooling Tank",
+    animation: "Smooth line animation of trucks and bikes moving across a route"
+  },
+  {
+    icon: Shield,
+    title: "Quality Assurance",
+    description: "Before processing, every batch undergoes strict quality tests",
+    details: "We test for purity, temperature, and hygiene. We adhere to Tanzanian Bureau of Standards (TBS) and Occupational Safety and Health Authority (OSHA) regulations to ensure consumer safety.",
+    time: "Every Batch",
+    quality: "TBS & OSHA Certified",
+    animation: "Animated lab with check-marks appearing as tests are approved"
   },
   {
     icon: Factory,
-    title: "Processing",
-    description: "Cultured and packaged with rigorous quality control standards",
-    details: "State-of-the-art processing facilities use modern equipment while respecting traditional culturing methods. Every batch undergoes multiple quality checks.",
+    title: "Processing & Transformation",
+    description: "Modern dairy technology to process milk into premium products",
+    details: "At our Arusha facility, we use modern equipment to produce Pasteurized & Homogenized Fresh Milk, Cultured Sour Milk (Mtindi), and Yogurt. Each step — pasteurization, fermentation, and packaging — is carefully controlled to preserve freshness and flavor.",
     time: "24-48 Hours",
-    quality: "Lab Tested"
+    quality: "Modern Technology",
+    animation: "Liquid transition between stages (milk flowing → packaged products)"
   },
   {
     icon: Store,
-    title: "Delivery",
-    description: "Premium products delivered fresh to local markets and retailers",
-    details: "Our distribution network ensures products reach customers within hours of packaging. Cold chain integrity is maintained throughout delivery.",
+    title: "Packaging & Distribution",
+    description: "High-quality, locally printed materials for safety and freshness",
+    details: "African Joy products are packaged using safe, fresh packaging materials. Distribution is handled through women vendors, retail shops, and supermarkets in Arusha, Manyara, and beyond.",
     time: "Same Day",
-    quality: "Fresh Guarantee"
+    quality: "Local Distribution",
+    animation: "Boxes flowing across screen representing delivery and reach"
+  },
+  {
+    icon: Leaf,
+    title: "Sustainability & Growth",
+    description: "We operate responsibly — minimizing waste and empowering communities",
+    details: "Training farmers in eco-friendly methods, and planning to connect the factory to a central sewage system for full environmental compliance by 2026. Our process is designed not just to produce milk, but to empower communities and nourish Tanzania.",
+    time: "Ongoing",
+    quality: "Eco-Friendly",
+    animation: "Green background with animated leaves morphing into African Joy logo"
   }
 ];
 
@@ -82,7 +104,7 @@ const ProcessPage = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-secondary-foreground/90"
           >
-            From farm to table with care at every step
+            From farm to shelf - empowering communities, nourishing Tanzania
           </motion.p>
         </div>
       </section>
@@ -239,10 +261,10 @@ const ProcessPage = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {[
-              { value: "10k+", label: "Liters Processed Daily" },
+              { value: "20,338L", label: "Monthly Collection" },
               { value: "< 2hrs", label: "Collection Time" },
-              { value: "100%", label: "Quality Tested" },
-              { value: "72hrs", label: "Farm to Shelf" },
+              { value: "100%", label: "TBS Tested" },
+              { value: "93+", label: "Women Farmers" },
             ].map((stat, idx) => (
               <motion.div
                 key={idx}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import TestimonialsSuccessStories from "@/components/TestimonialsSuccessStories";
 import heroMilkFlow from "@/assets/hero-milk-flow.jpg";
 import productDisplay from "@/assets/hero-dairy-bottles.jpg";
 import landscapeFarm from "@/assets/product-display1.jpg";
@@ -15,29 +16,29 @@ const quickLinks = [
     title: "Our Story",
     description: "Empowering 500+ women farmers across Tanzania",
     path: "/story",
-    color: "from-primary/20 to-transparent"
+    color: "from-primary/20 to-transparent",
   },
   {
     icon: Package,
     title: "Products",
     description: "Premium dairy from farm to table",
     path: "/products",
-    color: "from-secondary/20 to-transparent"
+    color: "from-secondary/20 to-transparent",
   },
   {
     icon: TrendingUp,
     title: "Our Process",
     description: "Quality at every step of the journey",
     path: "/process",
-    color: "from-primary/20 to-transparent"
+    color: "from-primary/20 to-transparent",
   },
   {
     icon: Users,
     title: "Impact",
     description: "Transforming communities together",
     path: "/impact",
-    color: "from-secondary/20 to-transparent"
-  }
+    color: "from-secondary/20 to-transparent",
+  },
 ];
 
 const Index = () => {
@@ -208,6 +209,7 @@ const Index = () => {
         </div>
       </section>
 
+      <TestimonialsSuccessStories />
       <Footer />
     </main>
   );

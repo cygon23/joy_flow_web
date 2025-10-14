@@ -1,15 +1,8 @@
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  AnimatePresence,
-} from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-// Import hero images
 import heroMilkFlow from "@/assets/hero-milk-flow.jpg";
 import heroFarmerHands from "@/assets/hero-farmer-hands.jpg";
 import heroProcessing from "@/assets/hero-processing.jpg";
@@ -19,233 +12,406 @@ import heroWomenFarmers from "@/assets/hero-women-farmers.jpg";
 
 const Hero = () => {
   const [activeImage, setActiveImage] = useState(0);
-  const cursorX = useMotionValue(0);
-  const cursorY = useMotionValue(0);
-
-  const springX = useSpring(cursorX, { stiffness: 150, damping: 20 });
-  const springY = useSpring(cursorY, { stiffness: 150, damping: 20 });
+  const [counters, setCounters] = useState({ farmers: 0, liters: 0, jobs: 0 });
 
   const images = [
-    { src: heroWomenFarmers, title: "Empowering Women" },
-    { src: heroDairyBottles, title: "Premium Quality" },
-    { src: heroMilkFlow, title: "Fresh Flow" },
-    { src: heroFarmerHands, title: "Care & Craft" },
-    { src: heroProcessing, title: "Modern Process" },
-    { src: heroConsumption, title: "Pure Joy" },
+    heroMilkFlow,
+    heroFarmerHands,
+    heroProcessing,
+    heroConsumption,
+    heroDairyBottles,
+    heroWomenFarmers,
+  ];
+
+  const stats = [
+    { label: "Women Farmers", value: 93, suffix: "+", color: "#E8252B" },
+    { label: "Liters Monthly", value: 20338, suffix: "", color: "#609F4D" },
+    { label: "Jobs Created", value: 250, suffix: "+", color: "#E8252B" },
   ];
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      cursorX.set(e.clientX - window.innerWidth / 2);
-      cursorY.set(e.clientY - window.innerHeight / 2);
-    };
+    const imageInterval = setInterval(() => {
+      setActiveImage((prev) => (prev + 1) % images.length);
+    }, 5000);
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [cursorX, cursorY]);
+    return () => clearInterval(imageInterval);
+  }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveImage((prev) => (prev + 1) % images.length);
-    }, 4000);
+    const counters = [
+      { key: "farmers", target: 93, duration: 2 },
+      { key: "liters", target: 20338, duration: 2.5 },
+      { key: "jobs", target: 250, duration: 2 },
+    ];
 
-    return () => clearInterval(interval);
-  }, [images.length]);
+    counters.forEach(({ key, target, duration }) => {
+      const interval = setInterval(() => {
+        setCounters((prev) => ({
+          ...prev,
+          [key]:
+            prev[key] < target
+              ? prev[key] + Math.ceil(target / (duration * 60))
+              : target,
+        }));
+      }, duration * 10);
+
+      return () => clearInterval(interval);
+    });
+  }, []);
 
   return (
-    <section className='relative min-h-screen bg-primary overflow-hidden'>
-      {/* Full-bleed Background Images with Cinematic Transitions */}
-      <div className='absolute inset-0'>
-        <AnimatePresence mode='wait'>
-          <motion.div
-            key={activeImage}
-            initial={{ opacity: 0, scale: 1.2 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 1.5, ease: [0.43, 0.13, 0.23, 0.96] }}
-            className='absolute inset-0'>
-            <motion.img
-              src={images[activeImage].src}
-              alt={images[activeImage].title}
-              className='w-full h-full object-cover'
-              animate={{
-                scale: [1, 1.15],
-              }}
-              transition={{
-                duration: 8,
-                ease: "linear",
-              }}
-            />
-            {/* Dramatic overlay with cursor-reactive gradient */}
-            <motion.div
-              className='absolute inset-0'
-              style={{
-                background: `radial-gradient(circle at ${
-                  50 + (cursorX.get() / window.innerWidth) * 20
-                }% ${
-                  50 + (cursorY.get() / window.innerHeight) * 20
-                }%, hsl(100 46% 20% / 0.5), hsl(100 46% 10% / 0.9))`,
-              }}
-            />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Content Layer */}
-      <div className='relative z-10 min-h-screen flex flex-col items-center justify-center px-6'>
+    <div className='relative min-h-screen overflow-hidden'>
+      {/* Main Hero Grid */}
+      <div className='grid grid-cols-1 lg:grid-cols-2 min-h-screen'>
+        {/* LEFT SECTION - PREMIUM CONTENT */}
         <motion.div
-          className='text-center max-w-6xl mx-auto'
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className='relative flex flex-col items-center justify-center px-8 md:px-16 py-20 min-h-screen'
           style={{
-            x: useSpring(cursorX, { stiffness: 50, damping: 30 }),
-            y: useSpring(cursorY, { stiffness: 50, damping: 30 }),
+            background: "linear-gradient(135deg, #609F4D 0%, #5a8f44 100%)",
           }}>
-          {/* Split Hero Title with Dramatic Reveal */}
-          <div className='overflow-hidden mb-8'>
-            <motion.h1
-              initial={{ y: 200, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className='text-6xl md:text-8xl lg:text-9xl font-bold text-primary-foreground leading-none'>
-              <motion.span
-                className='block'
-                initial={{ letterSpacing: "0.5em", opacity: 0 }}
-                animate={{ letterSpacing: "0em", opacity: 1 }}
-                transition={{ duration: 1.5, delay: 0.5 }}>
-                Taste the
-              </motion.span>
-            </motion.h1>
-          </div>
-
-          <div className='overflow-hidden mb-8'>
-            <motion.h1
-              initial={{ y: 200, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className='text-6xl md:text-8xl lg:text-9xl font-bold leading-none'>
-              <motion.span
-                className='block bg-gradient-to-r from-secondary via-accent to-secondary bg-clip-text text-transparent'
+          {/* Animated background elements */}
+          <motion.div className='absolute inset-0 overflow-hidden pointer-events-none'>
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className='absolute rounded-full'
                 style={{
-                  backgroundSize: "200% 100%",
+                  width: Math.random() * 500 + 200,
+                  height: Math.random() * 500 + 200,
+                  background: `rgba(232, 37, 43, ${
+                    0.02 + Math.random() * 0.03
+                  })`,
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  filter: "blur(100px)",
                 }}
                 animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  y: [0, 120, 0],
+                  x: [0, 80, 0],
+                  scale: [1, 1.25, 1],
                 }}
                 transition={{
-                  duration: 5,
+                  duration: 15 + Math.random() * 8,
                   repeat: Infinity,
-                  ease: "linear",
-                }}>
-                Flow of Joy
-              </motion.span>
-            </motion.h1>
-          </div>
+                  ease: "easeInOut",
+                  delay: i * 2,
+                }}
+              />
+            ))}
+          </motion.div>
 
-          {/* Subtitle with blur fade-in */}
-          <motion.p
-            initial={{ opacity: 0, filter: "blur(10px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className='text-xl md:text-3xl text-primary-foreground/90 mb-16 max-w-3xl mx-auto font-light'>
-            Empowering women farmers in Tanzania, delivering premium dairy from
-            farm to table
-          </motion.p>
-
-          {/* Magnetic CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className='relative inline-block'>
-            <Link to='/story'>
+          {/* Content */}
+          <div className='relative z-10 max-w-2xl text-center space-y-8'>
+            {/* Slogan - Premium Typography */}
+            <motion.div
+              className='space-y-2'
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}>
               <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                style={{
-                  x: springX,
-                  y: springY,
-                }}>
-                <Button
-                  size='lg'
-                  variant='secondary'
-                  className='text-xl px-12 py-8 rounded-full group font-bold relative overflow-hidden shadow-2xl'>
-                  <motion.span
-                    className='relative z-10 flex items-center gap-3'
-                    initial={false}>
-                    Discover Our Story
+                className='overflow-hidden'
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}>
+                <motion.h1
+                  className='text-6xl md:text-7xl lg:text-9xl font-black leading-tight tracking-tight'
+                  style={{ color: "white" }}
+                  initial={{ y: 120, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.3,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}>
+                  Drink it
+                </motion.h1>
+              </motion.div>
+
+              <motion.div
+                className='overflow-hidden'
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.1 }}>
+                <motion.h1
+                  className='text-6xl md:text-7xl lg:text-9xl font-black leading-tight tracking-tight'
+                  style={{ color: "#E8252B" }}
+                  initial={{ y: 120, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.5,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}>
+                  Enjoy..
+                </motion.h1>
+              </motion.div>
+            </motion.div>
+
+            {/* Premium Stats Cards */}
+            <motion.div
+              className='grid grid-cols-1 md:grid-cols-3 gap-4 py-8'
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}>
+              {stats.map((stat, idx) => (
+                <motion.div
+                  key={idx}
+                  className='relative overflow-hidden rounded-2xl backdrop-blur-md border-2 p-6'
+                  style={{
+                    borderColor: "rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.08)",
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.7 + idx * 0.1 }}
+                  whileHover={{
+                    y: -8,
+                    boxShadow: "0 20px 40px rgba(232, 37, 43, 0.2)",
+                  }}>
+                  {/* Animated background */}
+                  <motion.div
+                    className='absolute inset-0'
+                    style={{
+                      background: `linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(232, 37, 43, 0.05) 100%)`,
+                    }}
+                    animate={{
+                      opacity: [0.5, 1, 0.5],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      delay: idx * 0.3,
+                    }}
+                  />
+
+                  {/* Content */}
+                  <motion.div className='relative z-10 space-y-3'>
                     <motion.div
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}>
-                      <ArrowRight className='w-6 h-6' />
+                      className='text-4xl md:text-5xl font-black leading-none'
+                      style={{ color: stat.color }}
+                      initial={{ scale: 0.5, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.8, delay: 0.8 + idx * 0.1 }}>
+                      {idx === 0 && counters.farmers}
+                      {idx === 1 && counters.liters}
+                      {idx === 2 && counters.jobs}
+                      <span className='text-3xl'>{stat.suffix}</span>
+                    </motion.div>
+
+                    <motion.p
+                      className='text-sm font-bold text-white/80 uppercase tracking-wide'
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.6, delay: 0.9 + idx * 0.1 }}>
+                      {stat.label}
+                    </motion.p>
+
+                    {/* Progress Bar */}
+                    <motion.div className='w-full h-1 bg-white/10 rounded-full overflow-hidden mt-3'>
+                      <motion.div
+                        className='h-full rounded-full'
+                        style={{ background: stat.color }}
+                        initial={{ width: "0%" }}
+                        whileInView={{ width: "100%" }}
+                        transition={{ duration: 1.5, delay: 0.9 + idx * 0.1 }}
+                      />
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Subtitle */}
+            <motion.p
+              className='text-white/90 text-base md:text-lg leading-relaxed font-medium max-w-md mx-auto'
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}>
+              Empowering rural communities through premium dairy crafted by
+              dedicated farmers.
+            </motion.p>
+
+            {/* Explore Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className='pt-4'>
+              <Link to='/story'>
+                <motion.button
+                  whileHover={{ scale: 1.08, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  className='relative px-12 py-4 rounded-full font-bold text-lg overflow-hidden group'
+                  style={{
+                    background: "white",
+                    color: "#609F4D",
+                    boxShadow: "0 20px 50px rgba(0, 0, 0, 0.25)",
+                  }}>
+                  <motion.span className='relative z-10 flex items-center justify-center gap-3'>
+                    Explore Our Story
+                    <motion.div
+                      animate={{ x: [0, 8, 0] }}
+                      transition={{ duration: 4, repeat: Infinity }}>
+                      <ArrowRight className='w-5 h-5' />
                     </motion.div>
                   </motion.span>
 
-                  {/* Animated glow effect */}
                   <motion.div
-                    className='absolute inset-0 bg-gradient-to-r from-accent via-primary-foreground/20 to-accent'
-                    animate={{
-                      x: ["-100%", "100%"],
-                    }}
+                    className='absolute inset-0'
+                    style={{ background: "#E8252B" }}
+                    animate={{ x: ["-100%", "100%"] }}
                     transition={{
-                      duration: 2,
+                      duration: 5,
                       repeat: Infinity,
                       ease: "linear",
                     }}
                   />
-                </Button>
+                </motion.button>
+              </Link>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* RIGHT SECTION - IMAGE WITH PROGRESS BAR */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className='relative h-screen md:min-h-screen overflow-hidden flex items-center justify-center'>
+          {/* Image Carousel */}
+          <div className='absolute inset-0 w-full h-full'>
+            <AnimatePresence mode='wait'>
+              <motion.div
+                key={activeImage}
+                initial={{ opacity: 0, scale: 1.1, rotate: 3 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                exit={{ opacity: 0, scale: 0.95, rotate: -3 }}
+                transition={{
+                  duration: 1.4,
+                  ease: [0.43, 0.13, 0.23, 0.96],
+                }}
+                className='absolute inset-0 w-full h-full'>
+                <motion.img
+                  src={images[activeImage]}
+                  alt='African Joy Products'
+                  className='w-full h-full object-cover object-center'
+                  animate={{
+                    scale: [1, 1.08],
+                  }}
+                  transition={{
+                    duration: 5,
+                    ease: "linear",
+                  }}
+                />
+
+                {/* Vignette overlay */}
+                <motion.div
+                  className='absolute inset-0'
+                  style={{
+                    background:
+                      "radial-gradient(circle at 50% 50%, rgba(96, 159, 77, 0.12) 0%, rgba(96, 159, 77, 0.25) 100%)",
+                  }}
+                />
+
+                {/* Shimmer effect */}
+                <motion.div
+                  className='absolute inset-0'
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "100%" }}
+                  transition={{
+                    duration: 3.5,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                  }}
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent 0%, rgba(232, 37, 43, 0.1) 50%, transparent 100%)",
+                    width: "25%",
+                  }}
+                />
               </motion.div>
-            </Link>
+            </AnimatePresence>
+          </div>
+
+          {/* Modern Progress Bars - Top */}
+          <motion.div
+            className='absolute top-0 left-0 right-0 z-30 flex gap-1 px-6 pt-6'
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}>
+            {images.map((_, idx) => (
+              <motion.div
+                key={idx}
+                className='flex-1 h-1 rounded-full overflow-hidden backdrop-blur-sm'
+                style={{
+                  background: "rgba(255, 255, 255, 0.15)",
+                  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+                }}>
+                <motion.div
+                  className='h-full rounded-full'
+                  style={{
+                    background:
+                      idx === activeImage
+                        ? "linear-gradient(90deg, #609F4D 0%, #E8252B 100%)"
+                        : "rgba(255, 255, 255, 0.3)",
+                  }}
+                  animate={{
+                    width: idx === activeImage ? "100%" : "0%",
+                  }}
+                  transition={{
+                    duration: idx === activeImage ? 5 : 0.3,
+                    ease: idx === activeImage ? "linear" : "easeInOut",
+                  }}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Bottom Navigation - Interactive Dots */}
+          <motion.div
+            className='absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3 backdrop-blur-md px-6 py-4 rounded-full border'
+            style={{
+              borderColor: "rgba(255, 255, 255, 0.2)",
+              background: "rgba(0, 0, 0, 0.15)",
+            }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}>
+            {images.map((_, idx) => (
+              <motion.button
+                key={idx}
+                onClick={() => setActiveImage(idx)}
+                className='relative'
+                whileHover={{ scale: 1.3 }}>
+                <motion.div
+                  className='w-2.5 h-2.5 rounded-full border-2'
+                  style={{
+                    borderColor:
+                      activeImage === idx
+                        ? "#E8252B"
+                        : "rgba(255, 255, 255, 0.3)",
+                    background:
+                      activeImage === idx
+                        ? "#E8252B"
+                        : "rgba(255, 255, 255, 0.1)",
+                  }}
+                  animate={{
+                    scale: activeImage === idx ? 1.5 : 1,
+                    boxShadow:
+                      activeImage === idx
+                        ? "0 0 20px rgba(232, 37, 43, 0.6)"
+                        : "none",
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.button>
+            ))}
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Image Progress Indicators */}
-      <div className='absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-3'>
-        {images.map((_, idx) => (
-          <motion.button
-            key={idx}
-            onClick={() => setActiveImage(idx)}
-            className='relative h-1.5 bg-primary-foreground/20 rounded-full overflow-hidden cursor-pointer'
-            style={{ width: activeImage === idx ? "48px" : "24px" }}
-            animate={{ width: activeImage === idx ? "48px" : "24px" }}
-            transition={{ duration: 0.3 }}>
-            {activeImage === idx && (
-              <motion.div
-                className='absolute inset-0 bg-secondary'
-                initial={{ x: "-100%" }}
-                animate={{ x: "0%" }}
-                transition={{ duration: 4, ease: "linear" }}
-              />
-            )}
-          </motion.button>
-        ))}
-      </div>
-
-      {/* Ambient Light Particles */}
-      {[...Array(20)].map((_, idx) => (
-        <motion.div
-          key={idx}
-          className='absolute rounded-full bg-primary-foreground/30 backdrop-blur-sm'
-          style={{
-            width: Math.random() * 6 + 2,
-            height: Math.random() * 6 + 2,
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -200, 0],
-            x: [0, Math.random() * 100 - 50, 0],
-            opacity: [0, 1, 0],
-            scale: [0, 1.5, 0],
-          }}
-          transition={{
-            duration: 6 + Math.random() * 4,
-            repeat: Infinity,
-            delay: Math.random() * 4,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </section>
+    </div>
   );
 };
 

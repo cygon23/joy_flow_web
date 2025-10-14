@@ -15,10 +15,12 @@ const footerLinks = {
   company: [
     { name: "About Us", path: "/story" },
     { name: "Our Mission", path: "/story" },
+    { name: "Documents", path: "/documents" },
     { name: "Impact", path: "/impact" },
     { name: "Careers", path: "/contact" },
   ],
   products: [
+    { name: "Gallery", path: "/gallery" },
     { name: "Cultured Milk", path: "/products" },
     { name: "Yogurt", path: "/products" },
     { name: "Butter & Ghee", path: "/products" },
@@ -37,7 +39,7 @@ const socialLinks = [
     icon: Linkedin,
     url: "https://www.linkedin.com/company/african-joy",
     target: "_blank",
-    label: "Facebook",
+    label: "LinkedIn",
   },
   {
     icon: Instagram,
@@ -96,11 +98,14 @@ const Footer = () => {
                 </div>
                 <div className='flex items-center gap-3'>
                   <Phone className='w-4 h-4 flex-shrink-0' />
-                  <span>+255 XXX XXX XXX</span>
+                  <div>
+                    <div>+255 784 240 780</div>
+                    <div>+255 745 330 042</div>
+                  </div>
                 </div>
                 <div className='flex items-center gap-3'>
                   <Mail className='w-4 h-4 flex-shrink-0' />
-                  <span>info@africanjoy.com</span>
+                  <span>P.O. Box 2699, Arusha</span>
                 </div>
               </div>
             </motion.div>

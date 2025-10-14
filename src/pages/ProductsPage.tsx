@@ -11,43 +11,33 @@ import productDisplay from "@/assets/product-display.jpg";
 const products = [
   {
     icon: Milk,
-    name: "Fresh Milk",
+    name: "Pasteurized & Homogenized Fresh Milk",
     tagline: "Pure, Farm-Fresh Goodness",
-    description: "Direct from our partner farms to your table. Our fresh milk is collected daily from women dairy farmers, ensuring the highest quality and freshness. Rich in calcium, vitamins, and natural nutrients.",
-    benefits: ["Farm Fresh Daily", "100% Natural", "Rich in Calcium", "No Preservatives"],
+    description: "Direct from our partner farms in Olkeryan and Meru to your table. Our fresh milk undergoes strict quality testing and is pasteurized using modern dairy technology to ensure safety while preserving freshness and flavor.",
+    benefits: ["Farm Fresh Daily", "Pasteurized", "TBS Certified", "No Preservatives"],
     color: "from-primary/30 via-primary/10 to-transparent",
     sizes: ["500ml", "1L", "2L"],
-    price: "From TZS 2,000"
+    price: "Contact for pricing"
   },
   {
     icon: Coffee,
-    name: "Premium Yogurt",
+    name: "Yogurt",
     tagline: "Creamy Perfection in Every Spoonful",
-    description: "Smooth, creamy yogurt made from the finest farm-fresh milk. Packed with live cultures and probiotics, our yogurt is perfect for breakfast, snacks, or desserts. Available in natural and flavored varieties.",
-    benefits: ["Multiple Flavors", "High Protein", "Probiotic-Rich", "Gut Health"],
+    description: "Smooth, creamy yogurt made from the finest farm-fresh milk. Carefully fermented using modern processing technology while respecting traditional methods. Every batch undergoes multiple quality checks.",
+    benefits: ["High Protein", "Probiotic-Rich", "Quality Tested", "Fresh Daily"],
     color: "from-secondary/30 via-secondary/10 to-transparent",
     sizes: ["200g", "500g", "1kg"],
-    price: "From TZS 1,500"
+    price: "Contact for pricing"
   },
   {
     icon: Sparkles,
-    name: "Mtindi (Cultured Milk)",
+    name: "Cultured Sour Milk (Mtindi)",
     tagline: "Traditional Taste, Authentic Heritage",
     description: "Traditional Tanzanian cultured milk made using time-honored fermentation methods. Mtindi is naturally rich in probiotics, offering authentic taste and cultural heritage in every sip. A staple in East African cuisine.",
     benefits: ["Traditional Recipe", "Probiotic-Rich", "Cultural Heritage", "Natural Fermentation"],
     color: "from-primary/30 via-primary/10 to-transparent",
     sizes: ["500ml", "1L", "2L"],
-    price: "From TZS 1,800"
-  },
-  {
-    icon: Package,
-    name: "Artisan Cheese",
-    tagline: "Handcrafted Excellence",
-    description: "Artisan cheese crafted with care from premium milk. Our cheese selection includes fresh, aged, and specialty varieties. Perfect for cooking, snacking, or entertaining. Each batch is carefully monitored for quality and flavor.",
-    benefits: ["Handcrafted", "Multiple Varieties", "Premium Quality", "Fresh & Aged Options"],
-    color: "from-secondary/30 via-secondary/10 to-transparent",
-    sizes: ["200g", "500g", "1kg"],
-    price: "From TZS 4,000"
+    price: "Contact for pricing"
   }
 ];
 
@@ -85,7 +75,7 @@ const ProductsPage = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-primary-foreground/90"
           >
-            From farm-fresh milk to artisanal dairy delights
+            High-quality dairy products from women-owned farms
           </motion.p>
         </div>
       </section>
@@ -241,6 +231,53 @@ const ProductsPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Coming Soon Section */}
+      <section className="py-24 md:py-32 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-6xl font-bold mb-6">
+              Coming Soon
+            </h2>
+            <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">
+              Exciting new products in development for 2024-2026
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-4xl mx-auto">
+            {[
+              { name: "Flavored Milk", icon: Milk },
+              { name: "Butter", icon: Package },
+              { name: "Ghee", icon: Sparkles },
+              { name: "Cheese", icon: Package },
+              { name: "Cream", icon: Coffee },
+            ].map((product, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.6 }}
+                whileHover={{ y: -10, scale: 1.05 }}
+                className="bg-primary-foreground rounded-2xl p-6 text-center shadow-xl"
+              >
+                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-4">
+                  <product.icon className="w-8 h-8 text-primary-foreground" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground">
+                  {product.name}
+                </h3>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>

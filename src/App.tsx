@@ -14,6 +14,8 @@ import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 import LoadingIndicator from "./components/LoadingIndicator";
 import ChatBot from "./components/ChatBot";
+import Gallery from "./pages/Gallery";
+import Documents from "./pages/Documents";
 
 const queryClient = new QueryClient();
 
@@ -34,20 +36,22 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode='wait'>
           {isLoading ? (
-            <LoadingIndicator key="loading" />
+            <LoadingIndicator key='loading' />
           ) : (
-            <BrowserRouter key="content">
+            <BrowserRouter key='content'>
               <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/story" element={<Story />} />
-                <Route path="/products" element={<ProductsPage />} />
-                <Route path="/process" element={<ProcessPage />} />
-                <Route path="/impact" element={<ImpactPage />} />
-                <Route path="/contact" element={<ContactPage />} />
+                <Route path='/' element={<Index />} />
+                <Route path='/story' element={<Story />} />
+                <Route path='/products' element={<ProductsPage />} />
+                <Route path='/process' element={<ProcessPage />} />
+                <Route path='/impact' element={<ImpactPage />} />
+                <Route path='/contact' element={<ContactPage />} />
+                <Route path='/gallery' element={<Gallery />} />
+                <Route path='/documents' element={<Documents />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
+                <Route path='*' element={<NotFound />} />
               </Routes>
               <ChatBot />
             </BrowserRouter>

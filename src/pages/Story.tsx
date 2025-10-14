@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Heart, Users, Leaf, TrendingUp, Target, Award } from "lucide-react";
+import { Heart, Users, Leaf, TrendingUp, Target, Award, CheckCircle, Package, Truck, Factory } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroFarmerHands from "@/assets/hero-farmer-hands.jpg";
@@ -11,38 +11,40 @@ const narrativeBlocks = [
   {
     icon: Heart,
     title: "Empowering Women",
-    description: "At the heart of African Joy is our commitment to women dairy farmers. We provide fair wages, reliable payments, and economic independence to over 500 women across Tanzania.",
-    stat: "500+ Women Farmers",
+    description: "At the heart of African Joy is our partnership with women dairy farmers in Olkeryan and Meru. We provide fair wages, reliable payments, and economic independence through the MEDA (FEGEE Project) partnership to 93+ women farmers.",
+    stat: "93+ Women Farmers",
     color: "from-primary/20 to-transparent"
   },
   {
     icon: Users,
     title: "Community Partnership",
-    description: "We work directly with local cooperatives, ensuring that every farmer is treated as a valued partner. Our decentralized collection system strengthens communities.",
-    stat: "50+ Communities",
+    description: "We work directly with smallholder farmers, ensuring that every farmer is treated as a valued partner. Our 2 milk collection centers (Olkeryan & Karangai) strengthen communities and support sustainable farming.",
+    stat: "2 Collection Centers",
     color: "from-secondary/20 to-transparent"
   },
   {
     icon: Leaf,
-    title: "Zero Waste Mission",
-    description: "Through efficient collection and processing, we minimize spoilage and environmental impact. Sustainability is woven into every step of our process.",
-    stat: "30% Less Waste",
+    title: "Sustainable Production",
+    description: "Through efficient collection and processing, we minimize waste and environmental impact. We're planning to connect to a central sewage system for environmental compliance by 2026.",
+    stat: "20,338L Monthly",
     color: "from-primary/20 to-transparent"
   },
   {
     icon: TrendingUp,
     title: "Quality Excellence",
-    description: "Premium dairy products are our promise. From farm-fresh collection to careful processing, we maintain the highest standards at every stage.",
-    stat: "10k+ Liters Daily",
+    description: "Premium dairy products are our promise. From farm-fresh collection to careful processing, we maintain the highest TBS and OSHA standards at every stage.",
+    stat: "TBS Certified",
     color: "from-secondary/20 to-transparent"
   }
 ];
 
 const milestones = [
-  { year: "2018", title: "Founded", description: "African Joy begins with 50 farmers" },
-  { year: "2019", title: "Growth", description: "Expanded to 5 communities" },
-  { year: "2021", title: "Innovation", description: "Launched decentralized collection" },
-  { year: "2023", title: "Impact", description: "500+ women empowered" },
+  { year: "2009", title: "The Beginning", description: "Joy Joseph starts small-scale dairy farming for her family in Olkeryan, Arusha" },
+  { year: "2018", title: "Joy's Yard Products", description: "Formalized operations to empower women and youth in dairy farming" },
+  { year: "2020", title: "Rebranded to African Joy", description: "Expanded vision to become a leading dairy processor in Tanzania and beyond" },
+  { year: "2022-2023", title: "Major Growth", description: "MEDA partnership, factory upgrade, TBS/OSHA compliance, packaging machine installation" },
+  { year: "2023", title: "Nanenane Exhibition", description: "Participated in national agricultural exhibition, reaching 20,338L monthly collection" },
+  { year: "2024-2026", title: "Future Vision", description: "Expanding product line, acquiring transport, upgrading infrastructure" },
 ];
 
 const Story = () => {
@@ -79,7 +81,7 @@ const Story = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-primary-foreground/90"
           >
-            Building a sustainable dairy future, one farmer at a time
+            From a family farm to empowering communities - "We Believe in Farming; We Make a Difference"
           </motion.p>
         </div>
       </section>
@@ -97,7 +99,9 @@ const Story = () => {
               Our Mission
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Transforming dairy farming through partnership, sustainability, and quality
+              African Joy (formerly Joy's Yard Products) began in 2018, founded by Joy Joseph in Olkeryan, Arusha. 
+              Our roots trace back to 2009, when Joy started small-scale dairy farming for her family before expanding 
+              and formalizing operations in 2020 to empower women and youth in sustainable dairy production.
             </p>
           </motion.div>
 
@@ -154,33 +158,65 @@ const Story = () => {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-8">
-                Our Values
+                Our Vision, Mission & Core Values
               </h2>
+              <div className="mb-8 p-6 bg-primary-foreground/10 rounded-2xl">
+                <h3 className="text-2xl font-bold mb-3">Vision</h3>
+                <p className="text-primary-foreground/90 text-lg">
+                  To be a leading dairy farm and processor of high-quality dairy products within Tanzania and beyond.
+                </p>
+              </div>
+              <div className="mb-8 p-6 bg-primary-foreground/10 rounded-2xl">
+                <h3 className="text-2xl font-bold mb-3">Mission</h3>
+                <p className="text-primary-foreground/90 text-lg">
+                  To provide healthy and wholesome dairy products and heifers for healthy living/sustainable food production, 
+                  reduce poverty, and improve the quality of life of Tanzanians and beyond.
+                </p>
+              </div>
+              <h3 className="text-2xl font-bold mb-6">Core Values</h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <Target className="w-8 h-8 flex-shrink-0 mt-1" />
+                  <Award className="w-8 h-8 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Transparency</h3>
+                    <h3 className="text-xl font-bold mb-2">Quality</h3>
                     <p className="text-primary-foreground/90">
-                      Open communication and fair dealings with every farmer and customer
+                      Maintaining the highest standards in every product we deliver
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <Award className="w-8 h-8 flex-shrink-0 mt-1" />
+                  <Target className="w-8 h-8 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Excellence</h3>
+                    <h3 className="text-xl font-bold mb-2">Integrity</h3>
                     <p className="text-primary-foreground/90">
-                      Uncompromising quality standards from farm to table
+                      Honest and transparent dealings with farmers, partners, and customers
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Users className="w-8 h-8 flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">Teamwork</h3>
+                    <p className="text-primary-foreground/90">
+                      Working together with farmers and communities to achieve shared goals
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <Heart className="w-8 h-8 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Empowerment</h3>
+                    <h3 className="text-xl font-bold mb-2">Commitment</h3>
                     <p className="text-primary-foreground/90">
-                      Creating lasting economic opportunities for women farmers
+                      Dedicated to our mission of empowering women and sustainable farming
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <TrendingUp className="w-8 h-8 flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">Positivity</h3>
+                    <p className="text-primary-foreground/90">
+                      Bringing optimism and hope to farming communities across Tanzania
                     </p>
                   </div>
                 </div>
@@ -457,6 +493,157 @@ const Story = () => {
                     </div>
                   </motion.div>
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Social Impact Section */}
+      <section className="py-24 md:py-32 bg-secondary text-secondary-foreground">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-6xl font-bold mb-6">
+              Empowering Women in Dairy
+            </h2>
+            <p className="text-xl text-secondary-foreground/90 max-w-3xl mx-auto">
+              Transforming lives through partnership, training, and opportunity
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mb-16">
+            {[
+              { value: "93+", label: "Women Farmers", detail: "Supported through milk-can incentives" },
+              { value: "9", label: "Staff Jobs", detail: "6 women, 3 men employed" },
+              { value: "250+", label: "Women Beneficiaries", detail: "Target for empowerment" },
+              { value: "2", label: "Collection Centers", detail: "Olkeryan & Karangai" },
+            ].map((stat, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.6 }}
+                whileHover={{ y: -10, scale: 1.05 }}
+                className="bg-secondary-foreground rounded-2xl p-8 text-center shadow-xl"
+              >
+                <div className="text-5xl font-bold text-secondary mb-3">
+                  {stat.value}
+                </div>
+                <div className="text-xl font-bold text-foreground mb-2">
+                  {stat.label}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {stat.detail}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="bg-secondary-foreground/10 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold mb-6 text-center">Our Partnership Impact</h3>
+            <div className="space-y-4 text-lg">
+              <p className="flex items-start gap-3">
+                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
+                <span>Partners with Olkeryan and Meru farmers through MEDA (FEGEE Project)</span>
+              </p>
+              <p className="flex items-start gap-3">
+                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
+                <span>Provides comprehensive training on animal health, milk hygiene, and record-keeping</span>
+              </p>
+              <p className="flex items-start gap-3">
+                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
+                <span>Collects 20,338 liters of milk per month from women-owned farms</span>
+              </p>
+              <p className="flex items-start gap-3">
+                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
+                <span>Established 2 milk collection centers with modern cooling equipment</span>
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Future Plans Section */}
+      <section className="py-24 md:py-32 bg-card">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-6xl font-bold text-primary mb-6">
+              The Future of African Joy
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Our vision for 2024-2026: Expanding impact and innovation
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                title: "Expand Dairy Product Line",
+                items: ["Flavored Milk", "Butter", "Ghee", "Cheese", "Cream"],
+                icon: Package,
+                color: "primary"
+              },
+              {
+                title: "Acquire New Transport",
+                items: ["1 Delivery Truck", "2 Three-wheelers for collection", "Enhanced cold chain logistics"],
+                icon: Truck,
+                color: "secondary"
+              },
+              {
+                title: "Infrastructure Upgrade",
+                items: ["Dedicated transformer for factory power", "Central sewage system connection", "Environmental compliance"],
+                icon: Factory,
+                color: "primary"
+              },
+              {
+                title: "Community Growth",
+                items: ["Increase women's training programs", "Expand supplier network", "Target 250+ women beneficiaries"],
+                icon: Users,
+                color: "secondary"
+              },
+            ].map((plan, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.6 }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className="bg-background rounded-3xl p-8 shadow-xl border-2 border-transparent hover:border-primary transition-all"
+              >
+                <div className={`w-16 h-16 rounded-2xl bg-${plan.color} flex items-center justify-center mb-6`}>
+                  <plan.icon className={`w-8 h-8 text-${plan.color}-foreground`} />
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-4">
+                  {plan.title}
+                </h3>
+                <ul className="space-y-3">
+                  {plan.items.map((item, iidx) => (
+                    <li key={iidx} className="flex items-start gap-2">
+                      <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
