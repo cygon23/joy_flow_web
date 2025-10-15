@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -79,27 +80,32 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6 }}
-            className='hidden lg:block'>
-            <Link to='/contact'>
-              <Button
-                variant='default'
-                className='bg-secondary hover:bg-secondary/90'>
-                Partner With Us
-              </Button>
-            </Link>
-          </motion.div>
+          {/* Theme Toggle & CTA Button */}
+          <div className='hidden lg:flex items-center gap-3'>
+            <ThemeToggle />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6 }}>
+              <Link to='/contact'>
+                <Button
+                  variant='default'
+                  className='bg-secondary hover:bg-secondary/90'>
+                  Partner With Us
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className='lg:hidden p-2 text-foreground hover:text-primary transition-colors'>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Theme Toggle & Menu Button */}
+          <div className='lg:hidden flex items-center gap-2'>
+            <ThemeToggle />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className='p-2 text-foreground hover:text-primary transition-colors'>
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
