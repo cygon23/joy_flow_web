@@ -125,7 +125,7 @@ const Hero = () => {
                     delay: 0.3,
                     ease: [0.16, 1, 0.3, 1],
                   }}>
-                  Drink it
+                  Drink, eat,
                 </motion.h1>
               </motion.div>
 
@@ -144,7 +144,7 @@ const Hero = () => {
                     delay: 0.5,
                     ease: [0.16, 1, 0.3, 1],
                   }}>
-                  Enjoy..
+                  enjoy!
                 </motion.h1>
               </motion.div>
             </motion.div>
