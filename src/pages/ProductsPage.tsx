@@ -1,83 +1,77 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Milk, Coffee, Package, Sparkles, X } from "lucide-react";
+import { Milk, Coffee, Package, Sparkles, X, ShoppingCart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import productDisplay from "@/assets/product-display.jpg";
 
-const products = [
+// Product categories based on official price list
+const culturedMilk = [
+  { name: "Mtindi 5L (Gallon)", size: "5L", price: "12,500" },
+  { name: "Mtindi 3L (Gallon)", size: "3L", price: "8,100" },
+  { name: "Mtindi 500ml (Bottle)", size: "500ml", price: "1,500" },
+  { name: "Mtindi 500ml (Pouch)", size: "500ml", price: "1,300" },
+];
+
+const yogurt = [
+  { name: "Strawberry Drinking Yoghurt", size: "500ml (Bottle)", price: "2,500" },
+  { name: "Strawberry Yoghurt", size: "150g (12 Cups)", price: "12,000" },
+  { name: "Vanilla Yoghurt", size: "150g (12 Cups)", price: "12,000" },
+  { name: "Natural Yoghurt", size: "150g (12 Cups)", price: "12,000" },
+  { name: "Greek Yoghurt", size: "500g", price: "6,000" },
+];
+
+const cheeseAndCream = [
+  { name: "Cream", size: "500g", price: "5,500" },
+  { name: "Mozzarella", size: "1kg", price: "22,000" },
+  { name: "Gouda", size: "1kg", price: "25,000" },
+  { name: "Halloumi", size: "1kg", price: "24,000" },
+  { name: "Cheddar", size: "1kg", price: "29,000" },
+  { name: "Paneer", size: "1kg", price: "22,000" },
+  { name: "Feta", size: "250g", price: "5,500" },
+];
+
+const categories = [
   {
+    title: "🥛 Cultured Milk (Mtindi)",
     icon: Milk,
-    name: "Pasteurized & Homogenized Fresh Milk",
-    tagline: "Pure, Farm-Fresh Goodness",
-    description:
-      "Direct from our partner farms in Olkeryan and Meru to your table. Our fresh milk undergoes strict quality testing and is pasteurized using modern dairy technology to ensure safety while preserving freshness and flavor.",
-    benefits: [
-      "Farm Fresh Daily",
-      "Pasteurized",
-      "TBS Certified",
-      "No Preservatives",
-    ],
-    color: "from-primary/30 via-primary/10 to-transparent",
-    sizes: ["500ml", "1L", "2L"],
-    price: "Contact for pricing",
+    products: culturedMilk,
+    description: "Traditional Tanzanian cultured milk, rich in probiotics and heritage.",
+    color: "from-primary/20 via-primary/10 to-transparent",
   },
   {
+    title: "🍓 Flavoured Yoghurt",
     icon: Coffee,
-    name: "Yogurt",
-    tagline: "Creamy Perfection in Every Spoonful",
-    description:
-      "Smooth, creamy yogurt made from the finest farm-fresh milk. Carefully fermented using modern processing technology while respecting traditional methods. Every batch undergoes multiple quality checks.",
-    benefits: [
-      "High Protein",
-      "Probiotic-Rich",
-      "Quality Tested",
-      "Fresh Daily",
-    ],
-    color: "from-secondary/30 via-secondary/10 to-transparent",
-    sizes: ["200g", "500g", "1kg"],
-    price: "Contact for pricing",
+    products: yogurt,
+    description: "Creamy, probiotic-rich yogurt in delicious flavors.",
+    color: "from-secondary/20 via-secondary/10 to-transparent",
   },
   {
-    icon: Sparkles,
-    name: "Cultured Sour Milk (Mtindi)",
-    tagline: "Traditional Taste, Authentic Heritage",
-    description:
-      "Traditional Tanzanian cultured milk made using time-honored fermentation methods. Mtindi is naturally rich in probiotics, offering authentic taste and cultural heritage in every sip. A staple in East African cuisine.",
-    benefits: [
-      "Traditional Recipe",
-      "Probiotic-Rich",
-      "Cultural Heritage",
-      "Natural Fermentation",
-    ],
-    color: "from-primary/30 via-primary/10 to-transparent",
-    sizes: ["500ml", "1L", "2L"],
-    price: "Contact for pricing",
-  },
-  {
+    title: "🧀 Cheese & Cream",
     icon: Package,
-    name: "Cheese",
-    tagline: "Handcrafted, Fresh Cheese",
-    description:
-      "Artisanal cheese made from our fresh pasteurized milk. Carefully cultured and aged by local women producers to deliver rich flavor and texture. Perfect for everyday meals and special occasions.",
-    benefits: ["Handmade", "Locally Produced", "High Protein", "No Additives"],
-    color: "from-secondary/30 via-secondary/10 to-transparent",
-    sizes: ["200g", "500g", "1kg"],
-    price: "Contact for pricing",
+    products: cheeseAndCream,
+    description: "Artisanal cheese and fresh cream, handcrafted with care.",
+    color: "from-primary/20 via-primary/10 to-transparent",
   },
 ];
+
+interface ProductDetail {
+  name: string;
+  size: string;
+  price: string;
+  category: string;
+}
 
 const ProductsPage = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
-  const [showComingSoon, setShowComingSoon] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(null);
 
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen bg-background'>
       <Navbar />
 
       {/* Hero Section */}
@@ -90,84 +84,104 @@ const ProductsPage = () => {
           />
         </div>
 
-        <div className='relative z-10 text-center px-6 max-w-4xl mx-auto'>
+        <div className='relative z-10 text-center px-6 max-w-4xl mx-auto py-16'>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className='text-5xl md:text-7xl font-bold text-primary-foreground mb-6'>
+            className='text-4xl sm:text-5xl md:text-7xl font-bold text-primary-foreground mb-4 sm:mb-6'>
             Our Products
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className='text-xl md:text-2xl text-primary-foreground/90'>
-            High-quality dairy products from women-owned farms
+            className='text-lg sm:text-xl md:text-2xl text-primary-foreground/90'>
+            Premium dairy products from women-owned farms in Tanzania
           </motion.p>
         </div>
       </section>
 
-      {/* Products Grid */}
-      <section ref={ref} className='py-24 md:py-32 bg-card'>
-        <div className='container mx-auto px-6'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto'>
-            {products.map((product, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={
-                  isInView
-                    ? { opacity: 1, scale: 1 }
-                    : { opacity: 0, scale: 0.9 }
-                }
-                transition={{ delay: idx * 0.1, duration: 0.6 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                onClick={() => setSelectedProduct(product)}
-                className='cursor-pointer'>
-                <Card className='border-2 hover:border-primary transition-all overflow-hidden h-full group'>
-                  <CardContent className='p-0 relative'>
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-0 group-hover:opacity-100 transition-opacity`}
-                    />
+      {/* Products by Category */}
+      <section ref={ref} className='py-16 sm:py-24 md:py-32 bg-card'>
+        <div className='container mx-auto px-4 sm:px-6'>
+          {categories.map((category, categoryIdx) => (
+            <motion.div
+              key={categoryIdx}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ delay: categoryIdx * 0.2, duration: 0.6 }}
+              className='mb-16 sm:mb-24 last:mb-0'>
+              {/* Category Header */}
+              <div className='flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8'>
+                <div className='w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0'>
+                  <category.icon className='w-6 h-6 sm:w-8 sm:h-8 text-primary-foreground' />
+                </div>
+                <div>
+                  <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-1 sm:mb-2'>
+                    {category.title}
+                  </h2>
+                  <p className='text-sm sm:text-base text-muted-foreground'>
+                    {category.description}
+                  </p>
+                </div>
+              </div>
 
-                    <div className='p-8 relative z-10'>
-                      <motion.div
-                        whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                        transition={{ duration: 0.5 }}
-                        className='inline-block mb-6'>
-                        <div className='w-20 h-20 rounded-2xl bg-primary flex items-center justify-center'>
-                          <product.icon className='w-10 h-10 text-primary-foreground' />
+              {/* Products Grid */}
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6'>
+                {category.products.map((product, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={
+                      isInView
+                        ? { opacity: 1, scale: 1 }
+                        : { opacity: 0, scale: 0.9 }
+                    }
+                    transition={{ delay: categoryIdx * 0.2 + idx * 0.05, duration: 0.4 }}
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    onClick={() => setSelectedProduct({ ...product, category: category.title })}
+                    className='cursor-pointer'>
+                    <Card className='border-2 hover:border-primary transition-all overflow-hidden h-full group shadow-lg hover:shadow-xl'>
+                      <CardContent className='p-0 relative'>
+                        <div
+                          className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                        />
+
+                        <div className='p-4 sm:p-6 relative z-10'>
+                          <div className='aspect-square bg-muted rounded-xl mb-4 flex items-center justify-center overflow-hidden'>
+                            <category.icon className='w-12 h-12 sm:w-16 sm:h-16 text-muted-foreground/40' />
+                          </div>
+
+                          <h3 className='text-base sm:text-lg font-bold text-foreground mb-2 line-clamp-2'>
+                            {product.name}
+                          </h3>
+                          <p className='text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4'>
+                            {product.size}
+                          </p>
+
+                          <div className='flex items-center justify-between'>
+                            <div>
+                              <div className='text-xs text-muted-foreground'>Price</div>
+                              <div className='text-lg sm:text-xl font-bold text-secondary'>
+                                TZS {product.price}
+                              </div>
+                            </div>
+                            <Button
+                              variant='secondary'
+                              size='sm'
+                              className='group-hover:scale-110 transition-transform'>
+                              <ShoppingCart className='w-4 h-4' />
+                            </Button>
+                          </div>
                         </div>
-                      </motion.div>
-
-                      <h3 className='text-3xl font-bold text-foreground mb-2'>
-                        {product.name}
-                      </h3>
-                      <p className='text-secondary font-medium mb-4'>
-                        {product.tagline}
-                      </p>
-                      <p className='text-muted-foreground mb-6'>
-                        {product.description.substring(0, 120)}...
-                      </p>
-
-                      <div className='flex items-center justify-between'>
-                        <span className='text-lg font-bold text-primary'>
-                          {product.price}
-                        </span>
-                        <Button
-                          variant='secondary'
-                          size='sm'
-                          className='group-hover:scale-110 transition-transform'>
-                          Learn More
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -179,86 +193,46 @@ const ProductsPage = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedProduct(null)}
-            className='fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6'>
+            className='fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6'>
             <motion.div
               initial={{ scale: 0.9, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 50 }}
               onClick={(e) => e.stopPropagation()}
-              className='bg-card rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl'>
-              <div className='p-8 relative'>
+              className='bg-card rounded-2xl sm:rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl'>
+              <div className='p-6 sm:p-8 relative'>
                 <button
                   onClick={() => setSelectedProduct(null)}
-                  className='absolute top-4 right-4 w-10 h-10 rounded-full bg-muted hover:bg-muted/80 flex items-center justify-center transition-colors'>
-                  <X className='w-6 h-6' />
+                  className='absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-muted hover:bg-muted/80 flex items-center justify-center transition-colors'>
+                  <X className='w-5 h-5 sm:w-6 sm:h-6' />
                 </button>
 
-                <div className='flex items-start gap-6 mb-8'>
-                  <div className='w-24 h-24 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0'>
-                    <selectedProduct.icon className='w-12 h-12 text-primary-foreground' />
+                <div className='mb-6 sm:mb-8'>
+                  <div className='text-sm text-muted-foreground mb-2'>
+                    {selectedProduct.category}
                   </div>
-                  <div>
-                    <h2 className='text-4xl font-bold text-foreground mb-2'>
-                      {selectedProduct.name}
-                    </h2>
-                    <p className='text-xl text-secondary font-medium'>
-                      {selectedProduct.tagline}
-                    </p>
-                  </div>
+                  <h2 className='text-2xl sm:text-3xl font-bold text-foreground mb-2'>
+                    {selectedProduct.name}
+                  </h2>
+                  <p className='text-base sm:text-lg text-muted-foreground'>
+                    {selectedProduct.size}
+                  </p>
                 </div>
 
-                <p className='text-muted-foreground text-lg mb-8 leading-relaxed'>
-                  {selectedProduct.description}
-                </p>
-
-                <div className='mb-8'>
-                  <h3 className='text-2xl font-bold text-foreground mb-4'>
-                    Benefits
-                  </h3>
-                  <div className='grid grid-cols-2 gap-3'>
-                    {selectedProduct.benefits.map((benefit, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.1 }}
-                        className='flex items-center gap-2 bg-primary/10 rounded-lg p-3'>
-                        <div className='w-2 h-2 rounded-full bg-secondary' />
-                        <span className='text-foreground font-medium'>
-                          {benefit}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className='mb-8'>
-                  <h3 className='text-2xl font-bold text-foreground mb-4'>
-                    Available Sizes
-                  </h3>
-                  <div className='flex gap-3'>
-                    {selectedProduct.sizes.map((size, idx) => (
-                      <div
-                        key={idx}
-                        className='px-4 py-2 rounded-full bg-muted text-foreground font-medium'>
-                        {size}
-                      </div>
-                    ))}
-                  </div>
+                <div className='aspect-square bg-muted rounded-2xl mb-6 sm:mb-8 flex items-center justify-center'>
+                  <Package className='w-20 h-20 sm:w-24 sm:h-24 text-muted-foreground/40' />
                 </div>
 
                 <div className='flex items-center justify-between pt-6 border-t border-border'>
                   <div>
-                    <div className='text-sm text-muted-foreground mb-1'>
-                      Starting at
-                    </div>
-                    <div className='text-3xl font-bold text-primary'>
-                      {selectedProduct.price}
+                    <div className='text-sm text-muted-foreground mb-1'>Price</div>
+                    <div className='text-2xl sm:text-3xl font-bold text-secondary'>
+                      TZS {selectedProduct.price}
                     </div>
                   </div>
                   <Button
                     size='lg'
-                    className='bg-secondary hover:bg-secondary/90'>
+                    className='bg-secondary hover:bg-secondary/90 text-sm sm:text-base'>
                     Order Now
                   </Button>
                 </div>
@@ -267,63 +241,6 @@ const ProductsPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Coming Soon Section */}
-      <section className='py-24 md:py-32 bg-primary text-primary-foreground'>
-        <div className='container mx-auto px-6'>
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className='text-center mb-8'>
-            <h2 className='text-4xl md:text-6xl font-bold mb-4'>Coming Soon</h2>
-            <p className='text-xl text-primary-foreground/90 max-w-3xl mx-auto mb-6'>
-              Exciting new products in development for 2025-2026
-            </p>
-            <div className='flex justify-center'>
-              <button
-                onClick={() => setShowComingSoon((s) => !s)}
-                className='px-6 py-3 rounded-full bg-primary-foreground text-primary font-semibold shadow-lg hover:scale-105 transition-transform'
-              >
-                {showComingSoon ? 'Hide coming soon' : 'View coming soon'}
-              </button>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={showComingSoon ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.45 }}
-            className='overflow-hidden'
-          >
-            <div className='grid grid-cols-2 md:grid-cols-5 gap-6 max-w-4xl mx-auto py-6'>
-              {[
-                { name: 'Flavored Milk', icon: Milk },
-                { name: 'Butter', icon: Package },
-                { name: 'Ghee', icon: Sparkles },
-                { name: 'Cream', icon: Coffee },
-              ].map((product, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={showComingSoon ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-                  transition={{ delay: idx * 0.05 + 0.05, duration: 0.4 }}
-                  whileHover={{ y: -10, scale: 1.05 }}
-                  className='bg-primary-foreground rounded-2xl p-6 text-center shadow-xl'
-                >
-                  <div className='w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-4'>
-                    <product.icon className='w-8 h-8 text-primary-foreground' />
-                  </div>
-                  <h3 className='text-lg font-bold text-foreground'>
-                    {product.name}
-                  </h3>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       <Footer />
     </div>
