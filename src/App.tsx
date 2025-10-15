@@ -38,7 +38,7 @@ const App = () => {
         <Sonner />
         <AnimatePresence mode='wait'>
           {isLoading ? (
-            <LoadingIndicator key='loading' />
+            <LoadingIndicator key='loading' onComplete={() => setIsLoading(false)} />
           ) : (
             <BrowserRouter key='content'>
               <Routes>
