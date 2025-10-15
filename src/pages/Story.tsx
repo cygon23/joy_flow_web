@@ -52,91 +52,93 @@ const Story = () => {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <div className="min-h-screen">
+    <div className='min-h-screen'>
       <Navbar />
-      
+
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden mt-20">
-        <div className="absolute inset-0">
-          <img 
-            src={heroFarmerHands} 
-            alt="Woman farmer" 
-            className="w-full h-full object-cover"
+      <section className='relative min-h-[60vh] flex items-center justify-center overflow-hidden mt-20'>
+        <div className='absolute inset-0'>
+          <img
+            src={heroFarmerHands}
+            alt='Woman farmer'
+            className='w-full h-full object-cover'
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60" />
+          <div className='absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60' />
         </div>
-        
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+
+        <div className='relative z-10 text-center px-6 max-w-4xl mx-auto'>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6"
-          >
+            className='text-5xl md:text-7xl font-bold text-primary-foreground mb-6'>
             Our Story
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-primary-foreground/90"
-          >
-            From a family farm to empowering communities - "We Believe in Farming; We Make a Difference"
+            className='text-xl md:text-2xl text-primary-foreground/90'>
+            From a family farm to empowering communities - "We Believe in
+            Farming; We Make a Difference"
           </motion.p>
         </div>
       </section>
 
       {/* Mission Narrative Blocks */}
-      <section ref={ref} className="py-24 md:py-32 bg-card">
-        <div className="container mx-auto px-6">
+      <section ref={ref} className='py-24 md:py-32 bg-card'>
+        <div className='container mx-auto px-6'>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-6xl font-bold text-primary mb-6">
+            className='text-center mb-16'>
+            <h2 className='text-4xl md:text-6xl font-bold text-primary mb-6'>
               Our Mission
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              African Joy (formerly Joy's Yard Products) began in 2018, founded by Joy Joseph in Olkeryan, Arusha. 
-              Our roots trace back to 2009, when Joy started small-scale dairy farming for her family before expanding 
-              and formalizing operations in 2020 to empower women and youth in sustainable dairy production.
+            <p className='text-xl text-muted-foreground max-w-3xl mx-auto'>
+              African Joy (formerly Joy's Yard Products) began in 2018, founded
+              by Joy Joseph in Olkeryan, Arusha. Our roots trace back to 2009,
+              when Joy started small-scale dairy farming for her family before
+              expanding and formalizing operations in 2020 to empower women and
+              youth in sustainable dairy production.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto'>
             {narrativeBlocks.map((block, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                animate={
+                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                }
                 transition={{ delay: idx * 0.1, duration: 0.6 }}
                 whileHover={{ y: -10 }}
-                className="relative group"
-              >
-                <div className="bg-background rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all overflow-hidden">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${block.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                  
-                  <div className="relative z-10">
+                className='relative group'>
+                <div className='bg-background rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all overflow-hidden'>
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${block.color} opacity-0 group-hover:opacity-100 transition-opacity`}
+                  />
+
+                  <div className='relative z-10'>
                     <motion.div
                       whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.6 }}
-                      className="inline-block mb-6"
-                    >
-                      <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center">
-                        <block.icon className="w-8 h-8 text-primary-foreground" />
+                      className='inline-block mb-6'>
+                      <div className='w-16 h-16 rounded-2xl bg-primary flex items-center justify-center'>
+                        <block.icon className='w-8 h-8 text-primary-foreground' />
                       </div>
                     </motion.div>
-                    
-                    <h3 className="text-2xl font-bold text-foreground mb-4">
+
+                    <h3 className='text-2xl font-bold text-foreground mb-4'>
                       {block.title}
                     </h3>
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                    <p className='text-muted-foreground mb-6 leading-relaxed'>
                       {block.description}
                     </p>
-                    
-                    <div className="inline-block px-4 py-2 rounded-full bg-secondary text-secondary-foreground font-bold text-sm">
+
+                    <div className='inline-block px-4 py-2 rounded-full bg-secondary text-secondary-foreground font-bold text-sm'>
                       {block.stat}
                     </div>
                   </div>
@@ -148,75 +150,82 @@ const Story = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-24 md:py-32 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className='py-24 md:py-32 bg-primary text-primary-foreground'>
+        <div className='container mx-auto px-6'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-16 items-center'>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">
+              transition={{ duration: 0.8 }}>
+              <h2 className='text-4xl md:text-5xl font-bold mb-8'>
                 Our Vision, Mission & Core Values
               </h2>
-              <div className="mb-8 p-6 bg-primary-foreground/10 rounded-2xl">
-                <h3 className="text-2xl font-bold mb-3">Vision</h3>
-                <p className="text-primary-foreground/90 text-lg">
-                  To be a leading dairy farm and processor of high-quality dairy products within Tanzania and beyond.
+              <div className='mb-8 p-6 bg-primary-foreground/10 rounded-2xl'>
+                <h3 className='text-2xl font-bold mb-3'>Vision</h3>
+                <p className='text-primary-foreground/90 text-lg'>
+                  To be a leading dairy farm and processor of high-quality dairy
+                  products within Tanzania and beyond.
                 </p>
               </div>
-              <div className="mb-8 p-6 bg-primary-foreground/10 rounded-2xl">
-                <h3 className="text-2xl font-bold mb-3">Mission</h3>
-                <p className="text-primary-foreground/90 text-lg">
-                  To provide healthy and wholesome dairy products and heifers for healthy living/sustainable food production, 
-                  reduce poverty, and improve the quality of life of Tanzanians and beyond.
+              <div className='mb-8 p-6 bg-primary-foreground/10 rounded-2xl'>
+                <h3 className='text-2xl font-bold mb-3'>Mission</h3>
+                <p className='text-primary-foreground/90 text-lg'>
+                  To provide healthy and wholesome dairy products and heifers
+                  for healthy living/sustainable food production, reduce
+                  poverty, and improve the quality of life of Tanzanians and
+                  beyond.
                 </p>
               </div>
-              <h3 className="text-2xl font-bold mb-6">Core Values</h3>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <Award className="w-8 h-8 flex-shrink-0 mt-1" />
+              <h3 className='text-2xl font-bold mb-6'>Core Values</h3>
+              <div className='space-y-6'>
+                <div className='flex items-start gap-4'>
+                  <Award className='w-8 h-8 flex-shrink-0 mt-1' />
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Quality</h3>
-                    <p className="text-primary-foreground/90">
-                      Maintaining the highest standards in every product we deliver
+                    <h3 className='text-xl font-bold mb-2'>Quality</h3>
+                    <p className='text-primary-foreground/90'>
+                      Maintaining the highest standards in every product we
+                      deliver
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <Target className="w-8 h-8 flex-shrink-0 mt-1" />
+                <div className='flex items-start gap-4'>
+                  <Target className='w-8 h-8 flex-shrink-0 mt-1' />
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Integrity</h3>
-                    <p className="text-primary-foreground/90">
-                      Honest and transparent dealings with farmers, partners, and customers
+                    <h3 className='text-xl font-bold mb-2'>Integrity</h3>
+                    <p className='text-primary-foreground/90'>
+                      Honest and transparent dealings with farmers, partners,
+                      and customers
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <Users className="w-8 h-8 flex-shrink-0 mt-1" />
+                <div className='flex items-start gap-4'>
+                  <Users className='w-8 h-8 flex-shrink-0 mt-1' />
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Teamwork</h3>
-                    <p className="text-primary-foreground/90">
-                      Working together with farmers and communities to achieve shared goals
+                    <h3 className='text-xl font-bold mb-2'>Teamwork</h3>
+                    <p className='text-primary-foreground/90'>
+                      Working together with farmers and communities to achieve
+                      shared goals
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <Heart className="w-8 h-8 flex-shrink-0 mt-1" />
+                <div className='flex items-start gap-4'>
+                  <Heart className='w-8 h-8 flex-shrink-0 mt-1' />
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Commitment</h3>
-                    <p className="text-primary-foreground/90">
-                      Dedicated to our mission of empowering women and sustainable farming
+                    <h3 className='text-xl font-bold mb-2'>Commitment</h3>
+                    <p className='text-primary-foreground/90'>
+                      Dedicated to our mission of empowering women and
+                      sustainable farming
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <TrendingUp className="w-8 h-8 flex-shrink-0 mt-1" />
+                <div className='flex items-start gap-4'>
+                  <TrendingUp className='w-8 h-8 flex-shrink-0 mt-1' />
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Positivity</h3>
-                    <p className="text-primary-foreground/90">
-                      Bringing optimism and hope to farming communities across Tanzania
+                    <h3 className='text-xl font-bold mb-2'>Positivity</h3>
+                    <p className='text-primary-foreground/90'>
+                      Bringing optimism and hope to farming communities across
+                      Tanzania
                     </p>
                   </div>
                 </div>
@@ -228,13 +237,12 @@ const Story = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img 
-                  src={landscapeFarm} 
-                  alt="Farm landscape" 
-                  className="w-full h-auto"
+              className='relative'>
+              <div className='relative rounded-3xl overflow-hidden shadow-2xl'>
+                <img
+                  src={landscapeFarm}
+                  alt='Farm landscape'
+                  className='w-full h-auto'
                 />
               </div>
             </motion.div>
@@ -243,11 +251,11 @@ const Story = () => {
       </section>
 
       {/* Timeline */}
-      <section className="py-24 md:py-32 bg-gradient-to-b from-card to-muted/20 relative overflow-hidden">
+      <section className='py-24 md:py-32 bg-gradient-to-b from-card to-muted/20 relative overflow-hidden'>
         {/* Animated Background Elements */}
-        <div className="absolute inset-0 opacity-30">
+        <div className='absolute inset-0 opacity-30'>
           <motion.div
-            className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-gradient-to-br from-primary/20 to-transparent blur-3xl"
+            className='absolute top-1/4 left-10 w-64 h-64 rounded-full bg-gradient-to-br from-primary/20 to-transparent blur-3xl'
             animate={{
               scale: [1, 1.3, 1],
               x: [0, 50, 0],
@@ -256,7 +264,7 @@ const Story = () => {
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute bottom-1/4 right-10 w-64 h-64 rounded-full bg-gradient-to-br from-secondary/20 to-transparent blur-3xl"
+            className='absolute bottom-1/4 right-10 w-64 h-64 rounded-full bg-gradient-to-br from-secondary/20 to-transparent blur-3xl'
             animate={{
               scale: [1.3, 1, 1.3],
               x: [0, -50, 0],
@@ -266,58 +274,56 @@ const Story = () => {
           />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className='container mx-auto px-6 relative z-10'>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
-          >
+            className='text-center mb-20'>
             <motion.h2
-              className="text-4xl md:text-6xl font-bold text-primary mb-6"
+              className='text-4xl md:text-6xl font-bold text-primary mb-6'
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
               transition={{ duration: 5, repeat: Infinity }}
               style={{
-                backgroundImage: "linear-gradient(90deg, hsl(101, 45%, 45%), hsl(359, 70%, 51%), hsl(101, 45%, 45%))",
+                backgroundImage:
+                  "linear-gradient(90deg, hsl(101, 45%, 45%), hsl(359, 70%, 51%), hsl(101, 45%, 45%))",
                 backgroundSize: "200% auto",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
-              }}
-            >
+              }}>
               Our Journey
             </motion.h2>
-            <p className="text-xl text-muted-foreground">
+            <p className='text-xl text-muted-foreground'>
               Growing together, one milestone at a time
             </p>
           </motion.div>
 
-          <div className="max-w-6xl mx-auto relative">
+          <div className='max-w-6xl mx-auto relative'>
             {/* Animated Central Path - SVG */}
             <svg
-              className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 hidden md:block"
-              width="4"
-              height="100%"
-              style={{ zIndex: 0 }}
-            >
+              className='absolute left-1/2 top-0 bottom-0 -translate-x-1/2 hidden lg:block'
+              width='4'
+              height='100%'
+              style={{ zIndex: 0 }}>
               <motion.path
                 d={`M 2 0 Q 2 ${100} 2 ${200} T 2 ${400} T 2 ${600} T 2 800`}
-                stroke="url(#gradient)"
-                strokeWidth="3"
-                fill="none"
+                stroke='url(#gradient)'
+                strokeWidth='3'
+                fill='none'
                 initial={{ pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 2, ease: "easeInOut" }}
               />
               <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="hsl(101, 45%, 45%)" />
-                  <stop offset="50%" stopColor="hsl(359, 70%, 51%)" />
-                  <stop offset="100%" stopColor="hsl(101, 45%, 45%)" />
+                <linearGradient id='gradient' x1='0%' y1='0%' x2='0%' y2='100%'>
+                  <stop offset='0%' stopColor='hsl(101, 45%, 45%)' />
+                  <stop offset='50%' stopColor='hsl(359, 70%, 51%)' />
+                  <stop offset='100%' stopColor='hsl(101, 45%, 45%)' />
                 </linearGradient>
               </defs>
             </svg>
@@ -326,33 +332,42 @@ const Story = () => {
             {milestones.map((milestone, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, x: idx % 2 === 0 ? -100 : 100 }}
+                initial={{ opacity: 0, x: 0 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: idx * 0.2, duration: 0.8, type: "spring" }}
-                className={`flex items-center mb-20 md:mb-32 relative ${
+                transition={{
+                  delay: idx * 0.12,
+                  duration: 0.6,
+                  type: "spring",
+                }}
+                className={`flex flex-col md:flex-row items-start md:items-center mb-12 md:mb-20 relative ${
                   idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                }`}
-              >
+                }`}>
                 {/* Content Card */}
-                <div className={`flex-1 ${idx % 2 === 0 ? "md:pr-16" : "md:pl-16"}`}>
+                <div
+                  className={`flex-1 ${
+                    idx % 2 === 0 ? "md:pr-16" : "md:pl-16"
+                  }`}>
                   <motion.div
                     whileHover={{ scale: 1.05, y: -10 }}
-                    className="relative group"
-                  >
+                    className='relative group'>
                     {/* Glow Effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-br from-primary to-secondary rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity" />
-                    
-                    <div className="relative bg-card rounded-3xl p-8 shadow-xl border-2 border-transparent group-hover:border-primary/30 transition-all overflow-hidden">
+                    <div className='absolute -inset-1 bg-gradient-to-br from-primary to-secondary rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity' />
+
+                    <div className='relative bg-card rounded-3xl p-8 shadow-xl border-2 border-transparent group-hover:border-primary/30 transition-all overflow-hidden'>
                       {/* Animated Background Pattern */}
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className={`absolute inset-0 bg-gradient-to-br ${
-                          idx % 2 === 0 ? "from-primary/10 to-transparent" : "from-secondary/10 to-transparent"
-                        }`} />
+                      <div className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity'>
+                        <div
+                          className={`absolute inset-0 bg-gradient-to-br ${
+                            idx % 2 === 0
+                              ? "from-primary/10 to-transparent"
+                              : "from-secondary/10 to-transparent"
+                          }`}
+                        />
                         {[...Array(3)].map((_, i) => (
                           <motion.div
                             key={i}
-                            className="absolute w-20 h-20 rounded-full bg-primary/10 blur-xl"
+                            className='absolute w-20 h-20 rounded-full bg-primary/10 blur-xl'
                             animate={{
                               x: [0, Math.random() * 100 - 50],
                               y: [0, Math.random() * 100 - 50],
@@ -371,26 +386,28 @@ const Story = () => {
                         ))}
                       </div>
 
-                      <div className="relative z-10">
+                      <div className='relative z-10'>
                         {/* Year Badge */}
                         <motion.div
                           whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
                           transition={{ duration: 0.5 }}
-                          className="inline-block mb-4"
-                        >
-                          <div className={`px-6 py-3 rounded-full bg-gradient-to-br ${
-                            idx % 2 === 0 ? "from-primary to-primary-dark" : "from-secondary to-secondary/80"
-                          } shadow-lg`}>
-                            <span className="text-2xl md:text-3xl font-bold text-white">
+                          className='inline-block mb-4'>
+                          <div
+                            className={`px-6 py-3 rounded-full bg-gradient-to-br ${
+                              idx % 2 === 0
+                                ? "from-primary to-primary-dark"
+                                : "from-secondary to-secondary/80"
+                            } shadow-lg`}>
+                            <span className='text-2xl md:text-3xl font-bold text-white'>
                               {milestone.year}
                             </span>
                           </div>
                         </motion.div>
 
-                        <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+                        <h3 className='text-2xl md:text-3xl font-bold text-foreground mb-3'>
                           {milestone.title}
                         </h3>
-                        <p className="text-muted-foreground text-lg leading-relaxed">
+                        <p className='text-muted-foreground text-lg leading-relaxed'>
                           {milestone.description}
                         </p>
 
@@ -410,14 +427,17 @@ const Story = () => {
                 </div>
 
                 {/* Center Node */}
-                <div className="hidden md:flex items-center justify-center flex-shrink-0 relative z-10">
+                <div className='hidden md:flex items-center justify-center flex-shrink-0 relative z-10'>
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: idx * 0.2 + 0.3, type: "spring", stiffness: 200 }}
-                    className="relative"
-                  >
+                    transition={{
+                      delay: idx * 0.2 + 0.3,
+                      type: "spring",
+                      stiffness: 200,
+                    }}
+                    className='relative'>
                     {/* Pulse Rings */}
                     {[...Array(2)].map((_, i) => (
                       <motion.div
@@ -440,7 +460,9 @@ const Story = () => {
                     {/* Morphing Node */}
                     <motion.div
                       className={`w-8 h-8 bg-gradient-to-br ${
-                        idx % 2 === 0 ? "from-primary to-primary-dark" : "from-secondary to-secondary/80"
+                        idx % 2 === 0
+                          ? "from-primary to-primary-dark"
+                          : "from-secondary to-secondary/80"
                       } shadow-lg`}
                       animate={{
                         borderRadius: [
@@ -456,38 +478,44 @@ const Story = () => {
                         ease: "easeInOut",
                       }}
                       style={{
-                        boxShadow: `0 0 30px ${idx % 2 === 0 ? "hsla(101, 45%, 45%, 0.5)" : "hsla(359, 70%, 51%, 0.5)"}`,
+                        boxShadow: `0 0 30px ${
+                          idx % 2 === 0
+                            ? "hsla(101, 45%, 45%, 0.5)"
+                            : "hsla(359, 70%, 51%, 0.5)"
+                        }`,
                       }}
                     />
                   </motion.div>
                 </div>
 
                 {/* Spacer for alignment */}
-                <div className="flex-1 hidden md:block" />
+                <div className='flex-1 hidden md:block' />
 
                 {/* Mobile View */}
-                <div className="md:hidden w-full">
+                <div className='md:hidden w-full'>
                   <motion.div
                     whileHover={{ scale: 1.03 }}
-                    className="relative group"
-                  >
-                    <div className="absolute -inset-1 bg-gradient-to-br from-primary to-secondary rounded-3xl blur-xl opacity-20" />
-                    
-                    <div className="relative bg-card rounded-3xl p-6 shadow-lg border border-border">
-                      <motion.div className="inline-block mb-3">
-                        <div className={`px-5 py-2 rounded-full bg-gradient-to-br ${
-                          idx % 2 === 0 ? "from-primary to-primary-dark" : "from-secondary to-secondary/80"
-                        }`}>
-                          <span className="text-2xl font-bold text-white">
+                    className='relative group'>
+                    <div className='absolute -inset-1 bg-gradient-to-br from-primary to-secondary rounded-3xl blur-xl opacity-20' />
+
+                    <div className='relative bg-card rounded-3xl p-6 shadow-lg border border-border'>
+                      <motion.div className='inline-block mb-3'>
+                        <div
+                          className={`px-5 py-2 rounded-full bg-gradient-to-br ${
+                            idx % 2 === 0
+                              ? "from-primary to-primary-dark"
+                              : "from-secondary to-secondary/80"
+                          }`}>
+                          <span className='text-2xl font-bold text-white'>
                             {milestone.year}
                           </span>
                         </div>
                       </motion.div>
 
-                      <h3 className="text-xl font-bold text-foreground mb-2">
+                      <h3 className='text-xl font-bold text-foreground mb-2'>
                         {milestone.title}
                       </h3>
-                      <p className="text-muted-foreground">
+                      <p className='text-muted-foreground'>
                         {milestone.description}
                       </p>
                     </div>
@@ -500,29 +528,44 @@ const Story = () => {
       </section>
 
       {/* Social Impact Section */}
-      <section className="py-24 md:py-32 bg-secondary text-secondary-foreground">
-        <div className="container mx-auto px-6">
+      <section className='py-24 md:py-32 bg-secondary text-secondary-foreground'>
+        <div className='container mx-auto px-6'>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            className='text-center mb-16'>
+            <h2 className='text-4xl md:text-6xl font-bold mb-6'>
               Empowering Women in Dairy
             </h2>
-            <p className="text-xl text-secondary-foreground/90 max-w-3xl mx-auto">
+            <p className='text-xl text-secondary-foreground/90 max-w-3xl mx-auto'>
               Transforming lives through partnership, training, and opportunity
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mb-16">
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mb-16'>
             {[
-              { value: "93+", label: "Women Farmers", detail: "Supported through milk-can incentives" },
-              { value: "9", label: "Staff Jobs", detail: "6 women, 3 men employed" },
-              { value: "250+", label: "Women Beneficiaries", detail: "Target for empowerment" },
-              { value: "2", label: "Collection Centers", detail: "Olkeryan & Karangai" },
+              {
+                value: "93+",
+                label: "Women Farmers",
+                detail: "Supported through milk-can incentives",
+              },
+              {
+                value: "9",
+                label: "Staff Jobs",
+                detail: "6 women, 3 men employed",
+              },
+              {
+                value: "250+",
+                label: "Women Beneficiaries",
+                detail: "Target for empowerment",
+              },
+              {
+                value: "2",
+                label: "Collection Centers",
+                detail: "Olkeryan & Karangai",
+              },
             ].map((stat, idx) => (
               <motion.div
                 key={idx}
@@ -531,15 +574,14 @@ const Story = () => {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1, duration: 0.6 }}
                 whileHover={{ y: -10, scale: 1.05 }}
-                className="bg-secondary-foreground rounded-2xl p-8 text-center shadow-xl"
-              >
-                <div className="text-5xl font-bold text-secondary mb-3">
+                className='bg-secondary-foreground rounded-2xl p-8 text-center shadow-xl'>
+                <div className='text-5xl font-bold text-secondary mb-3'>
                   {stat.value}
                 </div>
-                <div className="text-xl font-bold text-foreground mb-2">
+                <div className='text-xl font-bold text-foreground mb-2'>
                   {stat.label}
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className='text-sm text-muted-foreground'>
                   {stat.detail}
                 </div>
               </motion.div>
@@ -551,25 +593,38 @@ const Story = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-secondary-foreground/10 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto"
-          >
-            <h3 className="text-2xl md:text-3xl font-bold mb-6 text-center">Our Partnership Impact</h3>
-            <div className="space-y-4 text-lg">
-              <p className="flex items-start gap-3">
-                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
-                <span>Partners with Olkeryan and Meru farmers through MEDA (FEGEE Project)</span>
+            className='bg-secondary-foreground/10 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto'>
+            <h3 className='text-2xl md:text-3xl font-bold mb-6 text-center'>
+              Our Partnership Impact
+            </h3>
+            <div className='space-y-4 text-lg'>
+              <p className='flex items-start gap-3'>
+                <CheckCircle className='w-6 h-6 flex-shrink-0 mt-1' />
+                <span>
+                  Partners with Olkeryan and Meru farmers through MEDA (FEGEE
+                  Project)
+                </span>
               </p>
-              <p className="flex items-start gap-3">
-                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
-                <span>Provides comprehensive training on animal health, milk hygiene, and record-keeping</span>
+              <p className='flex items-start gap-3'>
+                <CheckCircle className='w-6 h-6 flex-shrink-0 mt-1' />
+                <span>
+                  Provides comprehensive training on animal health, milk
+                  hygiene, and record-keeping
+                </span>
               </p>
-              <p className="flex items-start gap-3">
-                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
-                <span>Collects 20,338 liters of milk per month from women-owned farms</span>
+              <p className='flex items-start gap-3'>
+                <CheckCircle className='w-6 h-6 flex-shrink-0 mt-1' />
+                <span>
+                  Collects 20,338 liters of milk per month from women-owned
+                  farms
+                </span>
               </p>
-              <p className="flex items-start gap-3">
-                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
-                <span>Established 2 milk collection centers with modern cooling equipment</span>
+              <p className='flex items-start gap-3'>
+                <CheckCircle className='w-6 h-6 flex-shrink-0 mt-1' />
+                <span>
+                  Established 2 milk collection centers with modern cooling
+                  equipment
+                </span>
               </p>
             </div>
           </motion.div>
@@ -577,48 +632,59 @@ const Story = () => {
       </section>
 
       {/* Future Plans Section */}
-      <section className="py-24 md:py-32 bg-card">
-        <div className="container mx-auto px-6">
+      <section className='py-24 md:py-32 bg-card'>
+        <div className='container mx-auto px-6'>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-6xl font-bold text-primary mb-6">
+            className='text-center mb-16'>
+            <h2 className='text-4xl md:text-6xl font-bold text-primary mb-6'>
               The Future of African Joy
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className='text-xl text-muted-foreground max-w-3xl mx-auto'>
               Our vision for 2024-2026: Expanding impact and innovation
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto'>
             {[
               {
                 title: "Expand Dairy Product Line",
                 items: ["Flavored Milk", "Butter", "Ghee", "Cheese", "Cream"],
                 icon: Package,
-                color: "primary"
+                color: "primary",
               },
               {
                 title: "Acquire New Transport",
-                items: ["1 Delivery Truck", "2 Three-wheelers for collection", "Enhanced cold chain logistics"],
+                items: [
+                  "1 Delivery Truck",
+                  "2 Three-wheelers for collection",
+                  "Enhanced cold chain logistics",
+                ],
                 icon: Truck,
-                color: "secondary"
+                color: "secondary",
               },
               {
                 title: "Infrastructure Upgrade",
-                items: ["Dedicated transformer for factory power", "Central sewage system connection", "Environmental compliance"],
+                items: [
+                  "Dedicated transformer for factory power",
+                  "Central sewage system connection",
+                  "Environmental compliance",
+                ],
                 icon: Factory,
-                color: "primary"
+                color: "primary",
               },
               {
                 title: "Community Growth",
-                items: ["Increase women's training programs", "Expand supplier network", "Target 250+ women beneficiaries"],
+                items: [
+                  "Increase women's training programs",
+                  "Expand supplier network",
+                  "Target 250+ women beneficiaries",
+                ],
                 icon: Users,
-                color: "secondary"
+                color: "secondary",
               },
             ].map((plan, idx) => (
               <motion.div
@@ -628,19 +694,21 @@ const Story = () => {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1, duration: 0.6 }}
                 whileHover={{ y: -10, scale: 1.02 }}
-                className="bg-background rounded-3xl p-8 shadow-xl border-2 border-transparent hover:border-primary transition-all"
-              >
-                <div className={`w-16 h-16 rounded-2xl bg-${plan.color} flex items-center justify-center mb-6`}>
-                  <plan.icon className={`w-8 h-8 text-${plan.color}-foreground`} />
+                className='bg-background rounded-3xl p-8 shadow-xl border-2 border-transparent hover:border-primary transition-all'>
+                <div
+                  className={`w-16 h-16 rounded-2xl bg-${plan.color} flex items-center justify-center mb-6`}>
+                  <plan.icon
+                    className={`w-8 h-8 text-${plan.color}-foreground`}
+                  />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-4">
+                <h3 className='text-2xl font-bold text-foreground mb-4'>
                   {plan.title}
                 </h3>
-                <ul className="space-y-3">
+                <ul className='space-y-3'>
                   {plan.items.map((item, iidx) => (
-                    <li key={iidx} className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{item}</span>
+                    <li key={iidx} className='flex items-start gap-2'>
+                      <CheckCircle className='w-5 h-5 text-secondary flex-shrink-0 mt-0.5' />
+                      <span className='text-muted-foreground'>{item}</span>
                     </li>
                   ))}
                 </ul>

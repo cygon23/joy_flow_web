@@ -109,8 +109,9 @@ const ProductsPage = () => {
             <motion.div
               key={categoryIdx}
               initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ delay: categoryIdx * 0.2, duration: 0.6 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ delay: categoryIdx * 0.12, duration: 0.6 }}
               className='mb-16 sm:mb-24 last:mb-0'>
               {/* Category Header */}
               <div className='flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8'>
@@ -138,9 +139,17 @@ const ProductsPage = () => {
                         ? { opacity: 1, scale: 1 }
                         : { opacity: 0, scale: 0.9 }
                     }
-                    transition={{ delay: categoryIdx * 0.2 + idx * 0.05, duration: 0.4 }}
+                    transition={{
+                      delay: categoryIdx * 0.2 + idx * 0.05,
+                      duration: 0.4,
+                    }}
                     whileHover={{ y: -8, scale: 1.02 }}
-                    onClick={() => setSelectedProduct({ ...product, category: category.title })}
+                    onClick={() =>
+                      setSelectedProduct({
+                        ...product,
+                        category: category.title,
+                      })
+                    }
                     className='cursor-pointer'>
                     <Card className='border-2 hover:border-primary transition-all overflow-hidden h-full group shadow-lg hover:shadow-xl'>
                       <CardContent className='p-0 relative'>
@@ -162,7 +171,9 @@ const ProductsPage = () => {
 
                           <div className='flex items-center justify-between'>
                             <div>
-                              <div className='text-xs text-muted-foreground'>Price</div>
+                              <div className='text-xs text-muted-foreground'>
+                                Price
+                              </div>
                               <div className='text-lg sm:text-xl font-bold text-secondary'>
                                 TZS {product.price}
                               </div>
@@ -225,7 +236,9 @@ const ProductsPage = () => {
 
                 <div className='flex items-center justify-between pt-6 border-t border-border'>
                   <div>
-                    <div className='text-sm text-muted-foreground mb-1'>Price</div>
+                    <div className='text-sm text-muted-foreground mb-1'>
+                      Price
+                    </div>
                     <div className='text-2xl sm:text-3xl font-bold text-secondary'>
                       TZS {selectedProduct.price}
                     </div>

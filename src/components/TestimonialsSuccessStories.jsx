@@ -1,11 +1,25 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Play, X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TestimonialsSuccessStories = () => {
   const [activeTab, setActiveTab] = useState("testimonials");
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [videoIndex, setVideoIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // detect small screens to disable marquee animations
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)");
+    const handler = (e) => setIsMobile(e.matches);
+    handler(mq);
+    mq.addEventListener?.("change", handler);
+    return () => mq.removeEventListener?.("change", handler);
+  }, []);
+
+  // distances for marquee animation; smaller on mobile
+  const marqueeDistance = isMobile ? 900 : 1920;
+  const marqueeDuration = isMobile ? 18 : 30;
 
   const testimonials = [
     {
@@ -178,12 +192,10 @@ const TestimonialsSuccessStories = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className='text-center mb-16'>
-          <h2
-            className='text-4xl md:text-6xl font-black mb-6'
-            style={{ color: "#609F4D" }}>
+          <h2 className='text-4xl md:text-6xl font-black mb-6 text-[#609F4D] dark:text-primary'>
             Real Stories, Real Impact
           </h2>
-          <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
+          <p className='text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto'>
             Hear from farmers, communities, and partners transformed by African
             Joy
           </p>
@@ -232,12 +244,10 @@ const TestimonialsSuccessStories = () => {
               <div className='relative overflow-hidden'>
                 <motion.div
                   className='flex gap-6'
-                  animate={{
-                    x: [0, -1920],
-                  }}
+                  animate={{ x: [0, -marqueeDistance] }}
                   transition={{
                     x: {
-                      duration: 30,
+                      duration: marqueeDuration,
                       repeat: Infinity,
                       ease: "linear",
                       repeatType: "loop",
@@ -254,7 +264,7 @@ const TestimonialsSuccessStories = () => {
                         scale: 1.05,
                         boxShadow: "0 30px 60px rgba(96, 159, 77, 0.15)",
                       }}
-                      className='group relative rounded-3xl overflow-hidden bg-white p-8 border-2 border-gray-100 transition-all duration-300 flex-shrink-0 w-[380px]'>
+                      className='group relative rounded-3xl overflow-hidden bg-white p-6 sm:p-8 border-2 border-gray-100 transition-all duration-300 flex-shrink-0 w-[340px] sm:w-[380px]'>
                       {/* Background gradient on hover */}
                       <motion.div
                         className='absolute inset-0 bg-gradient-to-br from-[#609F4D]/5 to-[#E8252B]/5 opacity-0 group-hover:opacity-100 transition-opacity'
@@ -308,12 +318,10 @@ const TestimonialsSuccessStories = () => {
               <div className='relative overflow-hidden'>
                 <motion.div
                   className='flex gap-6'
-                  animate={{
-                    x: [-1920, 0],
-                  }}
+                  animate={{ x: [-marqueeDistance, 0] }}
                   transition={{
                     x: {
-                      duration: 30,
+                      duration: marqueeDuration,
                       repeat: Infinity,
                       ease: "linear",
                       repeatType: "loop",
@@ -330,7 +338,7 @@ const TestimonialsSuccessStories = () => {
                         scale: 1.05,
                         boxShadow: "0 30px 60px rgba(96, 159, 77, 0.15)",
                       }}
-                      className='group relative rounded-3xl overflow-hidden bg-white p-8 border-2 border-gray-100 transition-all duration-300 flex-shrink-0 w-[380px]'>
+                      className='group relative rounded-3xl overflow-hidden bg-white p-6 sm:p-8 border-2 border-gray-100 transition-all duration-300 flex-shrink-0 w-[340px] sm:w-[380px]'>
                       {/* Background gradient on hover */}
                       <motion.div
                         className='absolute inset-0 bg-gradient-to-br from-[#609F4D]/5 to-[#E8252B]/5 opacity-0 group-hover:opacity-100 transition-opacity'

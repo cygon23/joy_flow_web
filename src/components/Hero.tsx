@@ -13,6 +13,8 @@ import heroWomenFarmers from "@/assets/hero-women-farmers.jpg";
 const Hero = () => {
   const [activeImage, setActiveImage] = useState(0);
   const [counters, setCounters] = useState({ farmers: 0, liters: 0, jobs: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+  const [showMobileDetails, setShowMobileDetails] = useState(false);
 
   const images = [
     heroMilkFlow,
@@ -38,25 +40,45 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    const counters = [
-      { key: "farmers", target: 93, duration: 2 },
-      { key: "liters", target: 20338, duration: 2.5 },
-      { key: "jobs", target: 250, duration: 2 },
+    const mq = window.matchMedia("(max-width: 640px)");
+    const handler = (e: MediaQueryListEvent | MediaQueryList) => setIsMobile((e as any).matches ?? mq.matches);
+    handler(mq);
+    mq.addEventListener?.("change", handler);
+    return () => mq.removeEventListener?.("change", handler);
+  }, []);
+
+  useEffect(() => {
+    // set up independent intervals per stat, with proper cleanup
+    const countersConfig = [
+      { key: "farmers", target: 93, duration: 2000 },
+      { key: "liters", target: 20338, duration: 2500 },
+      { key: "jobs", target: 250, duration: 2000 },
     ];
 
-    counters.forEach(({ key, target, duration }) => {
-      const interval = setInterval(() => {
-        setCounters((prev) => ({
-          ...prev,
-          [key]:
-            prev[key] < target
-              ? prev[key] + Math.ceil(target / (duration * 60))
-              : target,
-        }));
-      }, duration * 10);
+    const intervals: number[] = [];
 
-      return () => clearInterval(interval);
+    countersConfig.forEach(({ key, target, duration }) => {
+      const tickMs = 30; // smooth updates
+      const steps = Math.max(1, Math.round(duration / tickMs));
+      const stepValue = Math.ceil(target / steps);
+
+      const id = window.setInterval(() => {
+        setCounters((prev) => {
+          const current = prev[key as keyof typeof prev] as number;
+          if (current >= target) {
+            return prev;
+          }
+          const next = Math.min(target, current + stepValue);
+          return { ...prev, [key]: next };
+        });
+      }, tickMs);
+
+      intervals.push(id);
     });
+
+    return () => {
+      intervals.forEach((i) => clearInterval(i));
+    };
   }, []);
 
   return (
@@ -68,7 +90,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className='relative flex flex-col items-center justify-center px-8 md:px-16 py-20 min-h-screen'
+          className='relative flex flex-col items-center justify-center px-6 md:px-16 py-12 md:py-20 md:min-h-screen'
           style={{
             background: "linear-gradient(135deg, #609F4D 0%, #5a8f44 100%)",
           }}>
@@ -116,10 +138,10 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}>
                 <motion.h1
-                  className='text-6xl md:text-7xl lg:text-9xl font-black leading-tight tracking-tight'
+                  className='text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black leading-tight tracking-tight'
                   style={{ color: "white" }}
                   initial={{ y: 120, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
+                  animate={{ y: 0, opacity: 1 }}
                   transition={{
                     duration: 1,
                     delay: 0.3,
@@ -135,10 +157,10 @@ const Hero = () => {
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.1 }}>
                 <motion.h1
-                  className='text-6xl md:text-7xl lg:text-9xl font-black leading-tight tracking-tight'
+                  className='text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black leading-tight tracking-tight'
                   style={{ color: "#E8252B" }}
                   initial={{ y: 120, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
+                  animate={{ y: 0, opacity: 1 }}
                   transition={{
                     duration: 1,
                     delay: 0.5,
@@ -149,12 +171,13 @@ const Hero = () => {
               </motion.div>
             </motion.div>
 
-            {/* Premium Stats Cards */}
-            <motion.div
-              className='grid grid-cols-1 md:grid-cols-3 gap-4 py-8'
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}>
+            {/* Premium Stats Cards - hidden on mobile unless expanded */}
+            {(!isMobile || showMobileDetails) && (
+              <motion.div
+                className='grid grid-cols-1 md:grid-cols-3 gap-4 py-6 md:py-8'
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}>
               {stats.map((stat, idx) => (
                 <motion.div
                   key={idx}
@@ -221,19 +244,21 @@ const Hero = () => {
                   </motion.div>
                 </motion.div>
               ))}
-            </motion.div>
+              </motion.div>
+            )}
+            {/* Subtitle - hidden on mobile unless expanded */}
+            {(!isMobile || showMobileDetails) && (
+              <motion.p
+                className='text-white/90 text-sm md:text-base leading-relaxed font-medium max-w-md mx-auto'
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}>
+                Empowering rural communities through premium dairy crafted by
+                dedicated farmers.
+              </motion.p>
+            )}
 
-            {/* Subtitle */}
-            <motion.p
-              className='text-white/90 text-base md:text-lg leading-relaxed font-medium max-w-md mx-auto'
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}>
-              Empowering rural communities through premium dairy crafted by
-              dedicated farmers.
-            </motion.p>
-
-            {/* Explore Button */}
+            {/* Explore Button - always visible, add mobile toggle for more details */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -245,9 +270,9 @@ const Hero = () => {
                   whileTap={{ scale: 0.95 }}
                   className='relative px-12 py-4 rounded-full font-bold text-lg overflow-hidden group'
                   style={{
-                    background: "white",
-                    color: "#609F4D",
-                    boxShadow: "0 20px 50px rgba(0, 0, 0, 0.25)",
+                    background: 'white',
+                    color: '#609F4D',
+                    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.25)',
                   }}>
                   <motion.span className='relative z-10 flex items-center justify-center gap-3'>
                     Explore Our Story
@@ -260,16 +285,28 @@ const Hero = () => {
 
                   <motion.div
                     className='absolute inset-0'
-                    style={{ background: "#E8252B" }}
-                    animate={{ x: ["-100%", "100%"] }}
+                    style={{ background: '#E8252B' }}
+                    animate={{ x: ['-100%', '100%'] }}
                     transition={{
                       duration: 5,
                       repeat: Infinity,
-                      ease: "linear",
+                      ease: 'linear',
                     }}
                   />
                 </motion.button>
               </Link>
+
+              {/* Mobile toggle to reveal more details */}
+              {isMobile && (
+                <div className='mt-4 flex justify-center'>
+                  <button
+                    onClick={() => setShowMobileDetails((s) => !s)}
+                    className='text-sm text-white/90 underline'
+                  >
+                    {showMobileDetails ? 'Hide details' : 'More details'}
+                  </button>
+                </div>
+              )}
             </motion.div>
           </div>
         </motion.div>
@@ -279,7 +316,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className='relative h-screen md:min-h-screen overflow-hidden flex items-center justify-center'>
+          className='relative min-h-[50vh] md:h-screen overflow-hidden flex items-center justify-center'>
           {/* Image Carousel */}
           <div className='absolute inset-0 w-full h-full'>
             <AnimatePresence mode='wait'>
@@ -337,7 +374,7 @@ const Hero = () => {
 
           {/* Modern Progress Bars - Top */}
           <motion.div
-            className='absolute top-0 left-0 right-0 z-30 flex gap-1 px-6 pt-6'
+            className='hidden sm:flex absolute top-0 left-0 right-0 z-30 flex-gap-1 px-6 pt-6'
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}>
@@ -371,7 +408,7 @@ const Hero = () => {
 
           {/* Bottom Navigation - Interactive Dots */}
           <motion.div
-            className='absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3 backdrop-blur-md px-6 py-4 rounded-full border'
+            className='absolute bottom-8 left-0 right-0 mx-auto z-30 flex gap-3 backdrop-blur-md px-4 py-3 rounded-full border max-w-max'
             style={{
               borderColor: "rgba(255, 255, 255, 0.2)",
               background: "rgba(0, 0, 0, 0.15)",
