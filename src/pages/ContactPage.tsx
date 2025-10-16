@@ -574,7 +574,7 @@ const ContactPage = () => {
               <div className='grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-12 border-t border-border'>
                 <div>
                   <div className='text-3xl font-bold text-primary mb-2'>
-                    Weekly
+                    Monthly
                   </div>
                   <div className='text-sm text-muted-foreground'>
                     Newsletter Updates
@@ -582,7 +582,7 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <div className='text-3xl font-bold text-primary mb-2'>
-                    200+
+                    50+
                   </div>
                   <div className='text-sm text-muted-foreground'>
                     Active Subscribers

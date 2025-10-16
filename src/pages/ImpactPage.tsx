@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Quote, TrendingUp, Users, Heart, DollarSign } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import heroFarmerHands from "@/assets/hero-farmer-hands.jpg";
+import heroFarmerHands from "@/assets/impact.jpg";
 import landscapeFarm from "@/assets/landscape-farm.jpg";
 
 const stats = [

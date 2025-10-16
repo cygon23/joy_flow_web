@@ -41,7 +41,8 @@ const Hero = () => {
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 640px)");
-    const handler = (e: MediaQueryListEvent | MediaQueryList) => setIsMobile((e as any).matches ?? mq.matches);
+    const handler = (e: MediaQueryListEvent | MediaQueryList) =>
+      setIsMobile((e as any).matches ?? mq.matches);
     handler(mq);
     mq.addEventListener?.("change", handler);
     return () => mq.removeEventListener?.("change", handler);
@@ -178,72 +179,72 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}>
-              {stats.map((stat, idx) => (
-                <motion.div
-                  key={idx}
-                  className='relative overflow-hidden rounded-2xl backdrop-blur-md border-2 p-6'
-                  style={{
-                    borderColor: "rgba(255, 255, 255, 0.2)",
-                    background: "rgba(255, 255, 255, 0.08)",
-                  }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.7 + idx * 0.1 }}
-                  whileHover={{
-                    y: -8,
-                    boxShadow: "0 20px 40px rgba(232, 37, 43, 0.2)",
-                  }}>
-                  {/* Animated background */}
+                {stats.map((stat, idx) => (
                   <motion.div
-                    className='absolute inset-0'
+                    key={idx}
+                    className='relative overflow-hidden rounded-2xl backdrop-blur-md border-2 p-6'
                     style={{
-                      background: `linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(232, 37, 43, 0.05) 100%)`,
+                      borderColor: "rgba(255, 255, 255, 0.2)",
+                      background: "rgba(255, 255, 255, 0.08)",
                     }}
-                    animate={{
-                      opacity: [0.5, 1, 0.5],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: idx * 0.3,
-                    }}
-                  />
-
-                  {/* Content */}
-                  <motion.div className='relative z-10 space-y-3'>
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.7 + idx * 0.1 }}
+                    whileHover={{
+                      y: -8,
+                      boxShadow: "0 20px 40px rgba(232, 37, 43, 0.2)",
+                    }}>
+                    {/* Animated background */}
                     <motion.div
-                      className='text-4xl md:text-5xl font-black leading-none'
-                      style={{ color: stat.color }}
-                      initial={{ scale: 0.5, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.8, delay: 0.8 + idx * 0.1 }}>
-                      {idx === 0 && counters.farmers}
-                      {idx === 1 && counters.liters}
-                      {idx === 2 && counters.jobs}
-                      <span className='text-3xl'>{stat.suffix}</span>
-                    </motion.div>
+                      className='absolute inset-0'
+                      style={{
+                        background: `linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(232, 37, 43, 0.05) 100%)`,
+                      }}
+                      animate={{
+                        opacity: [0.5, 1, 0.5],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        delay: idx * 0.3,
+                      }}
+                    />
 
-                    <motion.p
-                      className='text-sm font-bold text-white/80 uppercase tracking-wide'
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 0.6, delay: 0.9 + idx * 0.1 }}>
-                      {stat.label}
-                    </motion.p>
-
-                    {/* Progress Bar */}
-                    <motion.div className='w-full h-1 bg-white/10 rounded-full overflow-hidden mt-3'>
+                    {/* Content */}
+                    <motion.div className='relative z-10 space-y-3'>
                       <motion.div
-                        className='h-full rounded-full'
-                        style={{ background: stat.color }}
-                        initial={{ width: "0%" }}
-                        whileInView={{ width: "100%" }}
-                        transition={{ duration: 1.5, delay: 0.9 + idx * 0.1 }}
-                      />
+                        className='text-4xl md:text-5xl font-black leading-none'
+                        style={{ color: stat.color }}
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.8 + idx * 0.1 }}>
+                        {idx === 0 && counters.farmers}
+                        {idx === 1 && counters.liters}
+                        {idx === 2 && counters.jobs}
+                        <span className='text-3xl'>{stat.suffix}</span>
+                      </motion.div>
+
+                      <motion.p
+                        className='text-sm font-bold text-white/80 uppercase tracking-wide'
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.9 + idx * 0.1 }}>
+                        {stat.label}
+                      </motion.p>
+
+                      {/* Progress Bar */}
+                      <motion.div className='w-full h-1 bg-white/10 rounded-full overflow-hidden mt-3'>
+                        <motion.div
+                          className='h-full rounded-full'
+                          style={{ background: stat.color }}
+                          initial={{ width: "0%" }}
+                          whileInView={{ width: "100%" }}
+                          transition={{ duration: 1.5, delay: 0.9 + idx * 0.1 }}
+                        />
+                      </motion.div>
                     </motion.div>
                   </motion.div>
-                </motion.div>
-              ))}
+                ))}
               </motion.div>
             )}
             {/* Subtitle - hidden on mobile unless expanded */}
@@ -253,8 +254,9 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}>
-                Empowering rural communities through premium dairy crafted by
-                dedicated farmers.
+                Empowering communities one drop at a time ,throught turning
+                quality milk{" "}
+                <span>Into opportunities for local farmers & families</span>
               </motion.p>
             )}
 
@@ -270,9 +272,9 @@ const Hero = () => {
                   whileTap={{ scale: 0.95 }}
                   className='relative px-12 py-4 rounded-full font-bold text-lg overflow-hidden group'
                   style={{
-                    background: 'white',
-                    color: '#609F4D',
-                    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.25)',
+                    background: "white",
+                    color: "#609F4D",
+                    boxShadow: "0 20px 50px rgba(0, 0, 0, 0.25)",
                   }}>
                   <motion.span className='relative z-10 flex items-center justify-center gap-3'>
                     Explore Our Story
@@ -285,12 +287,12 @@ const Hero = () => {
 
                   <motion.div
                     className='absolute inset-0'
-                    style={{ background: '#E8252B' }}
-                    animate={{ x: ['-100%', '100%'] }}
+                    style={{ background: "#E8252B" }}
+                    animate={{ x: ["-100%", "100%"] }}
                     transition={{
                       duration: 5,
                       repeat: Infinity,
-                      ease: 'linear',
+                      ease: "linear",
                     }}
                   />
                 </motion.button>
@@ -301,9 +303,8 @@ const Hero = () => {
                 <div className='mt-4 flex justify-center'>
                   <button
                     onClick={() => setShowMobileDetails((s) => !s)}
-                    className='text-sm text-white/90 underline'
-                  >
-                    {showMobileDetails ? 'Hide details' : 'More details'}
+                    className='text-sm text-white/90 underline'>
+                    {showMobileDetails ? "Hide details" : "More details"}
                   </button>
                 </div>
               )}

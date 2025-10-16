@@ -10,57 +10,73 @@ const steps = [
   {
     icon: Droplets,
     title: "Farmer Partnership & Milk Collection",
-    description: "We work hand-in-hand with smallholder farmers — especially women — in the Olkeryan and Meru communities",
-    details: "Our network of over 93+ women farmers supplies high-quality raw milk daily. Through the MEDA (FEGEE) partnership, we train farmers on animal health, milk hygiene, and record-keeping. Farmers receive milk-can incentives and fair payment terms.",
+    description:
+      "We work hand-in-hand with smallholder farmers — especially women — in the Olkeryan and Meru communities",
+    details:
+      "Our network of over 93+ women farmers supplies high-quality raw milk daily. Through the MEDA (FEGEE) partnership, we train farmers on animal health, milk hygiene, and record-keeping. Farmers receive milk-can incentives and fair payment terms.",
     time: "Daily Collection",
     quality: "MEDA Trained Farmers",
-    animation: "Parallax map showing farmers delivering milk cans to collection centers"
+    animation:
+      "Parallax map showing farmers delivering milk cans to collection centers",
   },
   {
     icon: Truck,
     title: "Cooling & Transportation",
-    description: "Milk is collected at two main centers — Olkeryan and Karangai",
-    details: "Using dedicated collection tanks, including a newly installed 500-liter cooling tank that keeps milk fresh and safe. Our logistics team and trained riders transport milk to the factory under hygienic and temperature-controlled conditions.",
+    description:
+      "Milk is collected at two main centers — Olkeryan and Karangai",
+    details:
+      "Using dedicated collection tanks, including a newly installed 500-liter cooling tank that keeps milk fresh and safe. Our logistics team and trained riders transport milk to the factory under hygienic and temperature-controlled conditions.",
     time: "Under 2 Hours",
     quality: "500L Cooling Tank",
-    animation: "Smooth line animation of trucks and bikes moving across a route"
+    animation:
+      "Smooth line animation of trucks and bikes moving across a route",
   },
   {
     icon: Shield,
     title: "Quality Assurance",
-    description: "Before processing, every batch undergoes strict quality tests",
-    details: "We test for purity, temperature, and hygiene. We adhere to Tanzanian Bureau of Standards (TBS) and Occupational Safety and Health Authority (OSHA) regulations to ensure consumer safety.",
+    description:
+      "Before processing, every batch undergoes strict quality tests",
+    details:
+      "We test for purity, temperature, and hygiene. We adhere to Tanzanian Bureau of Standards (TBS) and Occupational Safety and Health Authority (OSHA) regulations to ensure consumer safety.",
     time: "Every Batch",
     quality: "TBS & OSHA Certified",
-    animation: "Animated lab with check-marks appearing as tests are approved"
+    animation: "Animated lab with check-marks appearing as tests are approved",
   },
   {
     icon: Factory,
     title: "Processing & Transformation",
-    description: "Modern dairy technology to process milk into premium products",
-    details: "At our Arusha facility, we use modern equipment to produce Pasteurized & Homogenized Fresh Milk, Cultured Sour Milk (Mtindi), and Yogurt. Each step — pasteurization, fermentation, and packaging — is carefully controlled to preserve freshness and flavor.",
+    description:
+      "Modern dairy technology to process milk into premium products",
+    details:
+      "At our Arusha facility, we use modern equipment to produce Pasteurized & Homogenized Fresh Milk, Cultured Sour Milk (Mtindi), and Yogurt. Each step — pasteurization, fermentation, and packaging — is carefully controlled to preserve freshness and flavor.",
     time: "24-48 Hours",
     quality: "Modern Technology",
-    animation: "Liquid transition between stages (milk flowing → packaged products)"
+    animation:
+      "Liquid transition between stages (milk flowing → packaged products)",
   },
   {
     icon: Store,
     title: "Packaging & Distribution",
-    description: "High-quality, locally printed materials for safety and freshness",
-    details: "African Joy products are packaged using safe, fresh packaging materials. Distribution is handled through women vendors, retail shops, and supermarkets in Arusha, Manyara, and beyond.",
+    description:
+      "High-quality, locally printed materials for safety and freshness",
+    details:
+      "African Joy products are packaged using safe, fresh packaging materials. Distribution is handled through women vendors, retail shops, and supermarkets in Arusha, Manyara, and beyond.",
     time: "Same Day",
     quality: "Local Distribution",
-    animation: "Boxes flowing across screen representing delivery and reach"
+    animation: "Boxes flowing across screen representing delivery and reach",
   },
   {
     icon: Leaf,
     title: "Sustainability & Growth",
-    description: "We operate responsibly — minimizing waste and empowering communities",
-    details: "Training farmers in eco-friendly methods, and planning to connect the factory to a central sewage system for full environmental compliance by 2026. Our process is designed not just to produce milk, but to empower communities and nourish Tanzania.",
-    time: "Ongoing",
-    quality: "Eco-Friendly",
-    animation: "Green background with animated leaves morphing into African Joy logo"
-  }
+    description:
+      "Building a greener future through responsible farming and smarter resource use.",
+    details:
+      "By 2026, African Joy aims to connect its factory to a central sewage system for full environmental compliance. We’re training farmers to grow their own quality grasses, recycle efficiently, and conserve the environment — improving both livelihoods and the land we depend on.",
+    time: "2025–2028",
+    quality: "Eco-Driven",
+    animation:
+      "Green background with animated leaves transforming into the African Joy logo, symbolizing renewal and harmony.",
+  },
 ];
 
 const qualityStandards = [

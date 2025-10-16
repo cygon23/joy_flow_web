@@ -80,7 +80,7 @@ const Footer = () => {
                       African Joy
                     </div>
                     <div className='text-xs text-primary-foreground/80'>
-                      Premium Dairy
+                      Quality Products
                     </div>
                   </div>
                 </div>

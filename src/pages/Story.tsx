@@ -5,46 +5,80 @@ import { Heart, Users, Leaf, TrendingUp, Target, Award, CheckCircle, Package, Tr
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroFarmerHands from "@/assets/hero-farmer-hands.jpg";
-import landscapeFarm from "@/assets/landscape-farm.jpg";
+import landscapeFarm from "@/assets/story.jpg";
 
 const narrativeBlocks = [
   {
     icon: Heart,
     title: "Empowering Women",
-    description: "At the heart of African Joy is our partnership with women dairy farmers in Olkeryan and Meru. We provide fair wages, reliable payments, and economic independence through the MEDA (FEGEE Project) partnership to 93+ women farmers.",
+    description:
+      "At the heart of African Joy is our commitment to uplifting women dairy farmers in Olkeryan and Meru. We create opportunities for fair income, reliable market access, and economic independence — helping women build stronger, more sustainable livelihoods.",
     stat: "93+ Women Farmers",
-    color: "from-primary/20 to-transparent"
+    color: "from-primary/20 to-transparent",
   },
   {
     icon: Users,
     title: "Community Partnership",
-    description: "We work directly with smallholder farmers, ensuring that every farmer is treated as a valued partner. Our 2 milk collection centers (Olkeryan & Karangai) strengthen communities and support sustainable farming.",
+    description:
+      "We work directly with smallholder farmers, ensuring that every farmer is treated as a valued partner. Our 2 milk collection centers (Olkeryan & Karangai) strengthen communities and support sustainable farming.",
     stat: "2 Collection Centers",
-    color: "from-secondary/20 to-transparent"
+    color: "from-secondary/20 to-transparent",
   },
   {
     icon: Leaf,
     title: "Sustainable Production",
-    description: "Through efficient collection and processing, we minimize waste and environmental impact. We're planning to connect to a central sewage system for environmental compliance by 2026.",
+    description:
+      "Through efficient collection and processing, we minimize waste and environmental impact. We're planning to connect to a central sewage system for environmental compliance by 2026.",
     stat: "20,338L Monthly",
-    color: "from-primary/20 to-transparent"
+    color: "from-primary/20 to-transparent",
   },
   {
     icon: TrendingUp,
     title: "Quality Excellence",
-    description: "Premium dairy products are our promise. From farm-fresh collection to careful processing, we maintain the highest TBS and OSHA standards at every stage.",
+    description:
+      "Premium dairy products are our promise. From farm-fresh collection to careful processing, we maintain the highest TBS and OSHA standards at every stage.",
     stat: "TBS Certified",
-    color: "from-secondary/20 to-transparent"
-  }
+    color: "from-secondary/20 to-transparent",
+  },
 ];
 
 const milestones = [
-  { year: "2009", title: "The Beginning", description: "Joy Joseph starts small-scale dairy farming for her family in Olkeryan, Arusha" },
-  { year: "2018", title: "Joy's Yard Products", description: "Formalized operations to empower women and youth in dairy farming" },
-  { year: "2020", title: "Rebranded to African Joy", description: "Expanded vision to become a leading dairy processor in Tanzania and beyond" },
-  { year: "2022-2023", title: "Major Growth", description: "MEDA partnership, factory upgrade, TBS/OSHA compliance, packaging machine installation" },
-  { year: "2023", title: "Nanenane Exhibition", description: "Participated in national agricultural exhibition, reaching 20,338L monthly collection" },
-  { year: "2024-2026", title: "Future Vision", description: "Expanding product line, acquiring transport, upgrading infrastructure" },
+  {
+    year: "2009",
+    title: "The Beginning",
+    description:
+      "Joy Joseph starts small-scale dairy farming for her family in Olkeryan, Arusha",
+  },
+  {
+    year: "2018",
+    title: "Joy's Yard Products",
+    description:
+      "Formalized operations to empower women and youth in dairy farming",
+  },
+  {
+    year: "2020",
+    title: "Rebranded to African Joy",
+    description:
+      "Expanded vision to become a leading dairy processor in Tanzania and beyond",
+  },
+  {
+    year: "2022-2023",
+    title: "Major Growth",
+    description:
+      "MEDA partnership, factory upgrade, TBS/OSHA compliance, packaging machine installation",
+  },
+  {
+    year: "2023",
+    title: "Nanenane Exhibition",
+    description:
+      "Participated in national agricultural exhibition, reaching 20,338L monthly collection",
+  },
+  {
+    year: "2024-2026",
+    title: "Future Vision",
+    description:
+      "Expanding product line, acquiring transport, upgrading infrastructure",
+  },
 ];
 
 const Story = () => {
@@ -94,7 +128,7 @@ const Story = () => {
             transition={{ duration: 0.8 }}
             className='text-center mb-16'>
             <h2 className='text-4xl md:text-6xl font-bold text-primary mb-6'>
-              Our Mission
+              Our Story
             </h2>
             <p className='text-xl text-muted-foreground max-w-3xl mx-auto'>
               African Joy (formerly Joy's Yard Products) began in 2018, founded
@@ -165,7 +199,7 @@ const Story = () => {
                 <h3 className='text-2xl font-bold mb-3'>Vision</h3>
                 <p className='text-primary-foreground/90 text-lg'>
                   To be a leading dairy farm and processor of high-quality dairy
-                  products within Tanzania and beyond.
+                  products within Tanzania.
                 </p>
               </div>
               <div className='mb-8 p-6 bg-primary-foreground/10 rounded-2xl'>
@@ -173,8 +207,7 @@ const Story = () => {
                 <p className='text-primary-foreground/90 text-lg'>
                   To provide healthy and wholesome dairy products and heifers
                   for healthy living/sustainable food production, reduce
-                  poverty, and improve the quality of life of Tanzanians and
-                  beyond.
+                  poverty, and improve the quality of life of Tanzanians.
                 </p>
               </div>
               <h3 className='text-2xl font-bold mb-6'>Core Values</h3>
@@ -652,14 +685,14 @@ const Story = () => {
             {[
               {
                 title: "Expand Dairy Product Line",
-                items: ["Flavored Milk", "Butter", "Ghee", "Cheese", "Cream"],
+                items: ["Flavored Milk", "Butter", "Ghee"],
                 icon: Package,
                 color: "primary",
               },
               {
                 title: "Acquire New Transport",
                 items: [
-                  "1 Delivery Truck",
+                  "6 Delivery Truck",
                   "2 Three-wheelers for collection",
                   "Enhanced cold chain logistics",
                 ],
@@ -681,7 +714,7 @@ const Story = () => {
                 items: [
                   "Increase women's training programs",
                   "Expand supplier network",
-                  "Target 250+ women beneficiaries",
+                  "Target 1000+ women beneficiaries",
                 ],
                 icon: Users,
                 color: "secondary",
