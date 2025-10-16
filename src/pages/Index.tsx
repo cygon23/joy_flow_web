@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import TestimonialsSuccessStories from "@/components/TestimonialsSuccessStories";
+import Newsletter from "@/components/Newsletter";
 import heroMilkFlow from "@/assets/hero-milk-flow.jpg";
 import productDisplay from "@/assets/hero-dairy-bottles.jpg";
 import landscapeFarm from "@/assets/product-display1.jpg";
@@ -210,6 +211,7 @@ const Index = () => {
       </section>
 
       <TestimonialsSuccessStories />
+      <Newsletter />
       <Footer />
     </main>
   );

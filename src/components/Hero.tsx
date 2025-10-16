@@ -254,7 +254,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}>
-                Empowering communities one drop at a time ,throught turning
+                Empowering communities one drop at a time ,African Joy turns
                 quality milk{" "}
                 <span>Into opportunities for local farmers & families</span>
               </motion.p>
