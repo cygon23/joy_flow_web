@@ -152,9 +152,18 @@ const OrderForm = ({ product, onClose }) => {
                 className='bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20'
                 whileHover={{ scale: 1.02 }}>
                 <div className='flex items-start gap-4'>
-                  <div className='w-16 h-16 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0'>
-                    <Package className='w-8 h-8 text-white' />
+                  <div className='w-16 h-16 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0 overflow-hidden'>
+                    {product?.image ? (
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className='w-full h-full object-cover rounded-xl'
+                      />
+                    ) : (
+                      <Package className='w-8 h-8 text-white' />
+                    )}
                   </div>
+
                   <div className='flex-1'>
                     <p className='text-xs text-white/70 mb-1'>
                       {product.category}

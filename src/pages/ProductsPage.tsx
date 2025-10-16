@@ -9,30 +9,70 @@ import Footer from "@/components/Footer";
 import OrderForm from "@/components/OrderForm";
 import productDisplay from "@/assets/product-display.jpg";
 
+import img500ml from "@/assets/pics/allProd/500ml.jpg";
+import cheederCheese from "@/assets/pics/allProd/cheedercheese.jpg";
+import cheederCheese2 from "@/assets/pics/allProd/cheedercheese2.jpg";
+import creemCheese from "@/assets/pics/allProd/creemCheese.jpg";
+import fetacheese from "@/assets/pics/allProd/fetacheese.jpg";
+import greekYougut from "@/assets/pics/allProd/greekYougut.jpg";
+import halloumiCheese from "@/assets/pics/allProd/halloumicheese.jpg";
+import mozzellaCheese from "@/assets/pics/allProd/mozzellacheese.jpg";
+import mtindiPouch from "@/assets/pics/allProd/mtindiPouch.jpg";
+import mtindi500 from "@/assets/pics/allProd/mtindi500.jpg";
+import img3lt from "@/assets/pics/allProd/3lt.jpg";
+import img5lt from "@/assets/pics/allProd/5lt.jpg";
+import paneerCheese from "@/assets/pics/allProd/paneercheese.jpg";
+import strawberryCup from "@/assets/pics/allProd/strawberrycup.jpg";
+import strowberryCup from "@/assets/pics/allProd/strowberrycup.jpg";
+import strobbery from "@/assets/pics/allProd/strobbery.jpg";
+import vanillaSmall from "@/assets/pics/allProd/vannilaSmall.jpg";
+import vanillaYoug from "@/assets/pics/allProd/vanillaYoug.jpg";
+import PlainYoug from "@/assets/pics/allProd/PlainYoug.jpg";
+
 // Product categories based on official price list
 const culturedMilk = [
-  { name: "Mtindi 5L (Gallon)", size: "5L", price: "12,500" },
-  { name: "Mtindi 3L (Gallon)", size: "3L", price: "8,100" },
-  { name: "Mtindi 500ml (Bottle)", size: "500ml", price: "1,500" },
-  { name: "Mtindi 500ml (Pouch)", size: "500ml", price: "1,300" },
+  { name: "Mtindi 5L (Gallon)", size: "5L", price: "12,500", image: img5lt },
+  { name: "Mtindi 3L (Gallon)", size: "3L", price: "8,100", image: img3lt },
+  { name: "Mtindi 500ml", size: "500ml", price: "1,500", image: mtindi500 },
+  { name: "Mtindi Pouch", size: "500ml", price: "1,300", image: mtindiPouch },
 ];
 
 const yogurt = [
-  { name: "Strawberry Drinking Yoghurt", size: "500ml (Bottle)", price: "2,500" },
-  { name: "Strawberry Yoghurt", size: "150g (12 Cups)", price: "12,000" },
-  { name: "Vanilla Yoghurt", size: "150g (12 Cups)", price: "12,000" },
-  { name: "Natural Yoghurt", size: "150g (12 Cups)", price: "12,000" },
-  { name: "Greek Yoghurt", size: "500g", price: "6,000" },
+  {
+    name: "Strawberry Drinking Yoghurt",
+    size: "500ml (Bottle)",
+    price: "2,500",
+    image: strowberryCup,
+  },
+  {
+    name: "Strawberry Yoghurt",
+    size: "150g (12 Cups)",
+    price: "12,000",
+    image: strobbery,
+  },
+  {
+    name: "Vanilla Yoghurt",
+    size: "150g (12 Cups)",
+    price: "12,000",
+    image: vanillaYoug,
+  },
+  {
+    name: "Natural Yoghurt",
+    size: "150g (12 Cups)",
+    price: "12,000",
+    image: PlainYoug,
+  },
+  { name: "Greek Yoghurt", size: "500g", price: "6,000", image: greekYougut },
 ];
 
 const cheeseAndCream = [
-  { name: "Cream", size: "500g", price: "5,500" },
-  { name: "Mozzarella", size: "1kg", price: "22,000" },
+  { name: "Cream", size: "500g", price: "5,500", image: creemCheese },
+  { name: "Mozzarella", size: "1kg", price: "22,000", image: mozzellaCheese },
   { name: "Gouda", size: "1kg", price: "25,000" },
-  { name: "Halloumi", size: "1kg", price: "24,000" },
-  { name: "Cheddar", size: "1kg", price: "29,000" },
-  { name: "Paneer", size: "1kg", price: "22,000" },
-  { name: "Feta", size: "250g", price: "5,500" },
+  { name: "Halloumi", size: "1kg", price: "24,000", image: halloumiCheese },
+  { name: "Cheddar", size: "1kg", price: "29,000", image: cheederCheese2 },
+  { name: "Paneer", size: "1kg", price: "22,000", image: paneerCheese },
+  { name: "Feta", size: "250g", price: "5,500", image: fetacheese },
 ];
 
 const categories = [
@@ -40,7 +80,8 @@ const categories = [
     title: "🥛 Cultured Milk (Mtindi)",
     icon: Milk,
     products: culturedMilk,
-    description: "Traditional Tanzanian cultured milk, rich in probiotics and heritage.",
+    description:
+      "Traditional Tanzanian cultured milk, rich in probiotics and heritage.",
     color: "from-primary/20 via-primary/10 to-transparent",
   },
   {
@@ -69,7 +110,9 @@ interface ProductDetail {
 const ProductsPage = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(
+    null
+  );
   const [showOrderForm, setShowOrderForm] = useState(false);
 
   return (
@@ -99,7 +142,7 @@ const ProductsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className='text-lg sm:text-xl md:text-2xl text-primary-foreground/90'>
-            Premium dairy products from women-owned farms in Tanzania
+            Quality dairy products from women-owned farms in Tanzania
           </motion.p>
         </div>
       </section>
@@ -160,10 +203,35 @@ const ProductsPage = () => {
                         />
 
                         <div className='p-4 sm:p-6 relative z-10'>
-                          <div className='aspect-square bg-muted rounded-xl mb-4 flex items-center justify-center overflow-hidden'>
-                            <category.icon className='w-12 h-12 sm:w-16 sm:h-16 text-muted-foreground/40' />
+                          {/*  Product Image or Icon Fallback */}
+                          <div className='aspect-square bg-muted rounded-xl mb-4 flex items-center justify-center overflow-hidden relative'>
+                            {product.image && (
+                              <img
+                                src={product.image}
+                                alt={product.name}
+                                className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'
+                                onError={(e) => {
+                                  // Hide the image if it fails to load
+                                  e.currentTarget.style.display = "none";
+                                  // Show the fallback icon
+                                  const fallbackIcon = e.currentTarget
+                                    .nextSibling as HTMLElement;
+                                  if (fallbackIcon)
+                                    fallbackIcon.style.display = "flex";
+                                }}
+                              />
+                            )}
+
+                            {/* Fallback Icon */}
+                            <category.icon
+                              className='w-12 h-12 sm:w-16 sm:h-16 text-muted-foreground/40 absolute'
+                              style={{
+                                display: product.image ? "none" : "flex",
+                              }}
+                            />
                           </div>
 
+                          {/* Product Info */}
                           <h3 className='text-base sm:text-lg font-bold text-foreground mb-2 line-clamp-2'>
                             {product.name}
                           </h3>
@@ -232,20 +300,33 @@ const ProductsPage = () => {
                   </p>
                 </div>
 
-                <div className='aspect-square bg-muted rounded-2xl mb-6 sm:mb-8 flex items-center justify-center'>
-                  <Package className='w-20 h-20 sm:w-24 sm:h-24 text-muted-foreground/40' />
+                <div className='aspect-square bg-muted rounded-2xl mb-6 sm:mb-8 flex items-center justify-center overflow-hidden'>
+                  {selectedProduct?.image ? (
+                    <motion.img
+                      src={selectedProduct.image}
+                      alt={selectedProduct.name}
+                      className='w-full h-full object-cover rounded-2xl'
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  ) : (
+                    <Package className='w-20 h-20 sm:w-24 sm:h-24 text-muted-foreground/40' />
+                  )}
                 </div>
 
                 {/* Product Description */}
                 <div className='mb-6 sm:mb-8 p-4 bg-muted/50 rounded-xl'>
-                  <h3 className='font-semibold text-foreground mb-2'>About This Product</h3>
+                  <h3 className='font-semibold text-foreground mb-2'>
+                    About This Product
+                  </h3>
                   <p className='text-sm text-muted-foreground leading-relaxed'>
-                    {selectedProduct.category.includes('Cultured Milk') && 
-                      'Traditional Tanzanian cultured milk (Mtindi), rich in natural probiotics and made from fresh, high-quality dairy. Perfect for daily nutrition and supporting digestive health.'}
-                    {selectedProduct.category.includes('Yoghurt') && 
-                      'Creamy, delicious yogurt made from premium milk sourced from women-owned farms. Packed with probiotics and crafted with care for exceptional taste and quality.'}
-                    {selectedProduct.category.includes('Cheese') && 
-                      'Artisanal cheese handcrafted using traditional methods and fresh dairy. Perfect for cooking, snacking, or adding gourmet touches to your favorite dishes.'}
+                    {selectedProduct.category.includes("Cultured Milk") &&
+                      "Traditional Tanzanian cultured milk (Mtindi), rich in natural probiotics and made from fresh, high-quality dairy. Perfect for daily nutrition and supporting digestive health."}
+                    {selectedProduct.category.includes("Yoghurt") &&
+                      "Creamy, delicious yogurt made from premium milk sourced from women-owned farms. Packed with probiotics and crafted with care for exceptional taste and quality."}
+                    {selectedProduct.category.includes("Cheese") &&
+                      "Artisanal cheese handcrafted using traditional methods and fresh dairy. Perfect for cooking, snacking, or adding gourmet touches to your favorite dishes."}
                   </p>
                 </div>
 
@@ -315,26 +396,33 @@ const ProductsPage = () => {
               </div>
               <h3 className='text-3xl font-bold mb-4'>Bulk Orders</h3>
               <p className='text-muted-foreground text-lg mb-6'>
-                Perfect for retailers, restaurants, and businesses. Get special pricing on large volume purchases.
+                Perfect for retailers, restaurants, and businesses. Get special
+                pricing on large volume purchases.
               </p>
               <ul className='space-y-3 mb-8'>
                 <li className='flex items-start gap-3'>
                   <div className='w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
                     <div className='w-2 h-2 rounded-full bg-primary' />
                   </div>
-                  <span className='text-foreground'>Discounted bulk pricing</span>
+                  <span className='text-foreground'>
+                    Discounted bulk pricing
+                  </span>
                 </li>
                 <li className='flex items-start gap-3'>
                   <div className='w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
                     <div className='w-2 h-2 rounded-full bg-primary' />
                   </div>
-                  <span className='text-foreground'>Priority delivery scheduling</span>
+                  <span className='text-foreground'>
+                    Priority delivery scheduling
+                  </span>
                 </li>
                 <li className='flex items-start gap-3'>
                   <div className='w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
                     <div className='w-2 h-2 rounded-full bg-primary' />
                   </div>
-                  <span className='text-foreground'>Dedicated account manager</span>
+                  <span className='text-foreground'>
+                    Dedicated account manager
+                  </span>
                 </li>
               </ul>
               <Button
@@ -357,26 +445,33 @@ const ProductsPage = () => {
               </div>
               <h3 className='text-3xl font-bold mb-4'>Monthly Billing</h3>
               <p className='text-muted-foreground text-lg mb-6'>
-                For regular customers who prefer monthly billing. Keep track of purchases and pay at month-end.
+                For regular customers who prefer monthly billing. Keep track of
+                purchases and pay at month-end.
               </p>
               <ul className='space-y-3 mb-8'>
                 <li className='flex items-start gap-3'>
                   <div className='w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
                     <div className='w-2 h-2 rounded-full bg-secondary' />
                   </div>
-                  <span className='text-foreground'>Consolidated monthly invoice</span>
+                  <span className='text-foreground'>
+                    Consolidated monthly invoice
+                  </span>
                 </li>
                 <li className='flex items-start gap-3'>
                   <div className='w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
                     <div className='w-2 h-2 rounded-full bg-secondary' />
                   </div>
-                  <span className='text-foreground'>Flexible payment terms</span>
+                  <span className='text-foreground'>
+                    Flexible payment terms
+                  </span>
                 </li>
                 <li className='flex items-start gap-3'>
                   <div className='w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
                     <div className='w-2 h-2 rounded-full bg-secondary' />
                   </div>
-                  <span className='text-foreground'>Detailed purchase tracking</span>
+                  <span className='text-foreground'>
+                    Detailed purchase tracking
+                  </span>
                 </li>
               </ul>
               <Button
