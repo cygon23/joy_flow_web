@@ -1,11 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Milk, Coffee, Package, Sparkles, X, ShoppingCart } from "lucide-react";
+import { Milk, Coffee, Package, Sparkles, X, ShoppingCart, Users, TrendingUp } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import OrderForm from "@/components/OrderForm";
 import productDisplay from "@/assets/product-display.jpg";
 
 // Product categories based on official price list
@@ -69,6 +70,7 @@ const ProductsPage = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(null);
+  const [showOrderForm, setShowOrderForm] = useState(false);
 
   return (
     <div className='min-h-screen bg-background'>
@@ -234,6 +236,19 @@ const ProductsPage = () => {
                   <Package className='w-20 h-20 sm:w-24 sm:h-24 text-muted-foreground/40' />
                 </div>
 
+                {/* Product Description */}
+                <div className='mb-6 sm:mb-8 p-4 bg-muted/50 rounded-xl'>
+                  <h3 className='font-semibold text-foreground mb-2'>About This Product</h3>
+                  <p className='text-sm text-muted-foreground leading-relaxed'>
+                    {selectedProduct.category.includes('Cultured Milk') && 
+                      'Traditional Tanzanian cultured milk (Mtindi), rich in natural probiotics and made from fresh, high-quality dairy. Perfect for daily nutrition and supporting digestive health.'}
+                    {selectedProduct.category.includes('Yoghurt') && 
+                      'Creamy, delicious yogurt made from premium milk sourced from women-owned farms. Packed with probiotics and crafted with care for exceptional taste and quality.'}
+                    {selectedProduct.category.includes('Cheese') && 
+                      'Artisanal cheese handcrafted using traditional methods and fresh dairy. Perfect for cooking, snacking, or adding gourmet touches to your favorite dishes.'}
+                  </p>
+                </div>
+
                 <div className='flex items-center justify-between pt-6 border-t border-border'>
                   <div>
                     <div className='text-sm text-muted-foreground mb-1'>
@@ -245,6 +260,7 @@ const ProductsPage = () => {
                   </div>
                   <Button
                     size='lg'
+                    onClick={() => setShowOrderForm(true)}
                     className='bg-secondary hover:bg-secondary/90 text-sm sm:text-base'>
                     Order Now
                   </Button>
@@ -254,6 +270,125 @@ const ProductsPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Order Form Modal */}
+      <AnimatePresence>
+        {showOrderForm && selectedProduct && (
+          <OrderForm
+            product={selectedProduct}
+            onClose={() => {
+              setShowOrderForm(false);
+              setSelectedProduct(null);
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Bulk & Monthly Payment Section */}
+      <section className='py-24 md:py-32 bg-secondary text-secondary-foreground'>
+        <div className='container mx-auto px-6'>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className='text-center mb-16'>
+            <h2 className='text-4xl md:text-6xl font-bold mb-6'>
+              Special Purchase Options
+            </h2>
+            <p className='text-xl text-secondary-foreground/90 max-w-3xl mx-auto'>
+              Flexible options for businesses and regular customers
+            </p>
+          </motion.div>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto'>
+            {/* Bulk Orders */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              whileHover={{ y: -10, scale: 1.02 }}
+              className='bg-secondary-foreground text-foreground rounded-3xl p-8 shadow-2xl'>
+              <div className='w-16 h-16 rounded-full bg-primary flex items-center justify-center mb-6'>
+                <TrendingUp className='w-8 h-8 text-primary-foreground' />
+              </div>
+              <h3 className='text-3xl font-bold mb-4'>Bulk Orders</h3>
+              <p className='text-muted-foreground text-lg mb-6'>
+                Perfect for retailers, restaurants, and businesses. Get special pricing on large volume purchases.
+              </p>
+              <ul className='space-y-3 mb-8'>
+                <li className='flex items-start gap-3'>
+                  <div className='w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
+                    <div className='w-2 h-2 rounded-full bg-primary' />
+                  </div>
+                  <span className='text-foreground'>Discounted bulk pricing</span>
+                </li>
+                <li className='flex items-start gap-3'>
+                  <div className='w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
+                    <div className='w-2 h-2 rounded-full bg-primary' />
+                  </div>
+                  <span className='text-foreground'>Priority delivery scheduling</span>
+                </li>
+                <li className='flex items-start gap-3'>
+                  <div className='w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
+                    <div className='w-2 h-2 rounded-full bg-primary' />
+                  </div>
+                  <span className='text-foreground'>Dedicated account manager</span>
+                </li>
+              </ul>
+              <Button
+                size='lg'
+                className='w-full bg-primary hover:bg-primary/90'>
+                Request Bulk Quote
+              </Button>
+            </motion.div>
+
+            {/* Monthly Payment Plans */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              whileHover={{ y: -10, scale: 1.02 }}
+              className='bg-secondary-foreground text-foreground rounded-3xl p-8 shadow-2xl'>
+              <div className='w-16 h-16 rounded-full bg-secondary flex items-center justify-center mb-6'>
+                <Users className='w-8 h-8 text-secondary-foreground' />
+              </div>
+              <h3 className='text-3xl font-bold mb-4'>Monthly Billing</h3>
+              <p className='text-muted-foreground text-lg mb-6'>
+                For regular customers who prefer monthly billing. Keep track of purchases and pay at month-end.
+              </p>
+              <ul className='space-y-3 mb-8'>
+                <li className='flex items-start gap-3'>
+                  <div className='w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
+                    <div className='w-2 h-2 rounded-full bg-secondary' />
+                  </div>
+                  <span className='text-foreground'>Consolidated monthly invoice</span>
+                </li>
+                <li className='flex items-start gap-3'>
+                  <div className='w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
+                    <div className='w-2 h-2 rounded-full bg-secondary' />
+                  </div>
+                  <span className='text-foreground'>Flexible payment terms</span>
+                </li>
+                <li className='flex items-start gap-3'>
+                  <div className='w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5'>
+                    <div className='w-2 h-2 rounded-full bg-secondary' />
+                  </div>
+                  <span className='text-foreground'>Detailed purchase tracking</span>
+                </li>
+              </ul>
+              <Button
+                size='lg'
+                variant='outline'
+                className='w-full border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground'>
+                Apply for Monthly Billing
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
