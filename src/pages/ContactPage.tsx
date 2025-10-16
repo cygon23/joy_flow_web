@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,6 +16,13 @@ import {
   Store,
   Clock,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -43,7 +51,7 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@africanjoy.co.tz",
+    value: "info@africanjoy.com",
     detail: "We reply within 24 hours",
   },
 ];
@@ -85,6 +93,7 @@ const ContactPage = () => {
     message: "",
   });
   const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [selectedPartnership, setSelectedPartnership] = useState<number | null>(null);
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
 
@@ -457,7 +466,7 @@ const ContactPage = () => {
               Partnership Opportunities
             </h2>
             <p className='text-xl text-primary-foreground/90 max-w-3xl mx-auto'>
-              Multiple ways to join our mission of empowerment and quality
+              Join us in empowering women farmers and building sustainable dairy communities across Tanzania. We offer diverse partnership models designed to create mutual value and lasting social impact.
             </p>
           </motion.div>
 
@@ -496,6 +505,7 @@ const ContactPage = () => {
 
                 <Button
                   variant='outline'
+                  onClick={() => setSelectedPartnership(idx)}
                   className='w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground'>
                   Learn More
                 </Button>
@@ -603,6 +613,161 @@ const ContactPage = () => {
       </section>
 
       <Footer />
+
+      {/* Partnership Details Dialog */}
+      <Dialog open={selectedPartnership !== null} onOpenChange={() => setSelectedPartnership(null)}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-primary flex items-center gap-3">
+              {selectedPartnership !== null && (
+                <>
+                  {React.createElement(partnershipTypes[selectedPartnership].icon, { className: "w-7 h-7" })}
+                  {partnershipTypes[selectedPartnership].title}
+                </>
+              )}
+            </DialogTitle>
+            <DialogDescription className="text-base pt-4">
+              {selectedPartnership === 0 && (
+                <div className="space-y-4 text-foreground">
+                  <p className="text-lg font-semibold text-primary">Empower Women Through Dairy</p>
+                  <p>
+                    Join our network of 93+ women dairy farmers and become part of a movement that's transforming lives across Tanzania. As a farmer partner, you'll receive comprehensive support to maximize your dairy production while ensuring fair compensation for your work.
+                  </p>
+                  
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-primary">What We Offer:</h4>
+                    <ul className="space-y-2 ml-4">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Fair Payment Terms:</strong> Competitive prices paid on time, every time. We value your hard work and ensure you receive fair compensation.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Free Training Programs:</strong> Access to modern dairy farming techniques, animal health management, and sustainable practices.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Equipment Support:</strong> Assistance with essential farming equipment and infrastructure to boost productivity.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Community Network:</strong> Join a supportive community of women farmers sharing experiences and best practices.</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-muted p-4 rounded-lg">
+                    <p className="text-sm">
+                      <strong>Current Impact:</strong> Our farmers collectively produce over 20,338 liters of milk monthly, creating sustainable livelihoods for their families and communities.
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-border">
+                    <p className="text-center text-muted-foreground">
+                      Interested in becoming a farmer partner?
+                    </p>
+                    <p className="text-center font-semibold text-lg text-primary mt-2">
+                      Email us at <a href="mailto:info@africanjoy.com" className="underline hover:text-secondary transition-colors">info@africanjoy.com</a>
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {selectedPartnership === 1 && (
+                <div className="space-y-4 text-foreground">
+                  <p className="text-lg font-semibold text-primary">Grow Your Business With Quality Dairy</p>
+                  <p>
+                    Partner with African Joy to distribute premium dairy products across Tanzania and beyond. Our products are crafted with care, backed by quality assurance, and supported by a mission that resonates with conscious consumers.
+                  </p>
+                  
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-primary">Partnership Benefits:</h4>
+                    <ul className="space-y-2 ml-4">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Premium Product Range:</strong> Access to our full line of cultured milk, yogurts, cheeses, and cream products—all made from ethically sourced dairy.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Marketing Support:</strong> Co-branded materials, product displays, and marketing campaigns to help you sell more.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Flexible Terms:</strong> Competitive pricing, volume discounts, and payment plans tailored to your business needs.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Quality Assurance:</strong> Consistent product quality with full traceability and compliance with food safety standards.</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-muted p-4 rounded-lg">
+                    <p className="text-sm">
+                      <strong>Ideal For:</strong> Supermarkets, retail stores, restaurants, cafes, hotels, and specialty food shops looking to offer premium dairy products with a social impact story.
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-border">
+                    <p className="text-center text-muted-foreground">
+                      Ready to distribute African Joy products?
+                    </p>
+                    <p className="text-center font-semibold text-lg text-primary mt-2">
+                      Email us at <a href="mailto:info@africanjoy.com" className="underline hover:text-secondary transition-colors">info@africanjoy.com</a>
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {selectedPartnership === 2 && (
+                <div className="space-y-4 text-foreground">
+                  <p className="text-lg font-semibold text-primary">Collaborate For Lasting Impact</p>
+                  <p>
+                    Join forces with African Joy on strategic initiatives that drive sustainability, empower communities, and innovate within the dairy sector. We welcome partnerships with NGOs, development organizations, research institutions, and corporate social responsibility programs.
+                  </p>
+                  
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-primary">Collaboration Areas:</h4>
+                    <ul className="space-y-2 ml-4">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Sustainability Projects:</strong> Environmental initiatives, renewable energy adoption, and sustainable farming practices.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Community Development:</strong> Women's empowerment programs, education initiatives, and rural development projects.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Dairy Innovation:</strong> Research partnerships, technology adoption, product development, and quality improvement.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                        <span><strong>Capacity Building:</strong> Training programs, knowledge transfer, and skills development for farmers and processors.</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-muted p-4 rounded-lg">
+                    <p className="text-sm">
+                      <strong>Our Approach:</strong> We believe in partnerships that create shared value—combining your expertise and resources with our on-ground presence and community relationships to achieve meaningful, measurable impact.
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-border">
+                    <p className="text-center text-muted-foreground">
+                      Interested in strategic collaboration?
+                    </p>
+                    <p className="text-center font-semibold text-lg text-primary mt-2">
+                      Email us at <a href="mailto:info@africanjoy.com" className="underline hover:text-secondary transition-colors">info@africanjoy.com</a>
+                    </p>
+                  </div>
+                </div>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
