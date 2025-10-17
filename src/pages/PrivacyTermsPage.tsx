@@ -90,7 +90,7 @@ export default function PrivacyTermsPage(): JSX.Element {
                       <p className='mt-1 text-xs text-slate-600'>
                         African Joy Dairy Ltd
                         <br />
-                        Olkeryan, Arusha, Tanzania
+                        Arusha, Tanzania
                         <br />
                         <a
                           className='text-[10px] text-emerald-700 underline'
