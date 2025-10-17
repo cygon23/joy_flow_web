@@ -16,6 +16,7 @@ import LoadingIndicator from "./components/LoadingIndicator";
 import ChatBot from "./components/ChatBot";
 import Gallery from "./pages/Gallery";
 import Documents from "./pages/Documents";
+import PrivacyTermsPage from "./pages/PrivacyTermsPage";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +39,10 @@ const App = () => {
         <Sonner />
         <AnimatePresence mode='wait'>
           {isLoading ? (
-            <LoadingIndicator key='loading' onComplete={() => setIsLoading(false)} />
+            <LoadingIndicator
+              key='loading'
+              onComplete={() => setIsLoading(false)}
+            />
           ) : (
             <BrowserRouter key='content'>
               <Routes>
@@ -50,6 +54,7 @@ const App = () => {
                 <Route path='/contact' element={<ContactPage />} />
                 <Route path='/gallery' element={<Gallery />} />
                 <Route path='/documents' element={<Documents />} />
+                <Route path='/terms' element={<PrivacyTermsPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path='*' element={<NotFound />} />
               </Routes>

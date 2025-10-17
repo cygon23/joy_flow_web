@@ -42,13 +42,13 @@ const yogurt = [
     name: "Strawberry Drinking Yoghurt",
     size: "500ml (Bottle)",
     price: "2,500",
-    image: strowberryCup,
+    image: strobbery,
   },
   {
     name: "Strawberry Yoghurt",
     size: "150g (12 Cups)",
     price: "12,000",
-    image: strobbery,
+    image: strowberryCup,
   },
   {
     name: "Vanilla Yoghurt",
@@ -142,7 +142,7 @@ const ProductsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className='text-lg sm:text-xl md:text-2xl text-primary-foreground/90'>
-            Quality dairy products from women-owned farms in Tanzania
+            Quality dairy products from farms in Tanzania
           </motion.p>
         </div>
       </section>
